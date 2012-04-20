@@ -1,0 +1,41 @@
+@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .dropModule
+    {
+        background-color: #00ff21;
+        width: 500px;
+        height: 500px;
+        margin-top: 100px;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#moduleText').draggable({ revert: true });
+        $('.dropModule').droppable({
+            drop: function () {
+                $.ajax({
+                    url: 'CMD/RenderModule', type: 'POST', context: document.body, contentType: 'application/json', success: function (rs) {
+                        $('.dropModule').append(rs);
+                    }
+
+                });
+            }
+        });
+    });
+</script>
+<div>
+    <div style="background-color: #0094ff; width: 100px;" id="moduleText">
+        Text
+    </div>
+</div>
+@{
+    var temp = ViewBag.temp;
+    <div>@temp</div>
+}
+<div>
+    @Html.Partial("Partial1")
+</div>
+<div class="dropModule">
+</div>
