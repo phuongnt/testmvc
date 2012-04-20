@@ -14,15 +14,19 @@ namespace pnet.Controllers
             pnet.Models.Portal oportal = new Models.Portal();
             oportal.ID = 1;
             oportal.Name = "conmeno";
-            oportal.Products.Add(new Models.Product(1, "product1"));
-            oportal.Products.Add(new Models.Product(2, "product1"));
-            oportal.Products.Add(new Models.Product(3, "product2"));
+            //oportal.Products.Add(new Models.Product(1, "product1"));
+            //oportal.Products.Add(new Models.Product(2, "product1"));
+            //oportal.Products.Add(new Models.Product(3, "product2"));
 
-            Models.Product oproduct = new Models.Product(32, "");
+            Models.Product oproduct = new Models.Product();
             oproduct.ID = 32;
             oproduct.Name = "phuong";
 
-            string temp = pnet.Models.Utility.Serialize(oproduct, true);
+            string temp = "";
+
+
+            temp = pnet.Models.Utility.Serialize(oproduct, true);
+
             ViewBag.hehe = temp;
             return View();
         }

@@ -114,10 +114,10 @@ namespace pnet.Models
 
         public string Name;
 
-        public Product(int ID, string Name)
-        {
-            this.ID = ID;
-            this.Name = Name;
-        }
+        //public Product(int ID, string Name)
+        //{
+        //    this.ID = ID;
+        //    this.Name = Name;
+        //}
     }
 }
