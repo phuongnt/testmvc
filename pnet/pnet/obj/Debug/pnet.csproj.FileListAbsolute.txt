@@ -106,3 +106,6 @@ H:\DestinetMVC\MVC4\pnet\pnet\bin\System.Web.WebPages.Razor.xml
 H:\DestinetMVC\MVC4\pnet\pnet\obj\Debug\pnet.csprojResolveAssemblyReference.cache
 H:\DestinetMVC\MVC4\pnet\pnet\obj\Debug\pnet.dll
 H:\DestinetMVC\MVC4\pnet\pnet\obj\Debug\pnet.pdb
+E:\MVC4\pnet\pnet\obj\Debug\pnet.csprojResolveAssemblyReference.cache
+E:\MVC4\pnet\pnet\obj\Debug\pnet.dll
+E:\MVC4\pnet\pnet\obj\Debug\pnet.pdb
