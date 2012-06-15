@@ -1,0 +1,9 @@
+E:\MyProject\Utility2\Utility2\bin\Debug\Utility2.exe.config
+E:\MyProject\Utility2\Utility2\obj\Debug\Utility2.csprojResolveAssemblyReference.cache
+E:\MyProject\Utility2\Utility2\obj\Debug\Utility2.Form1.resources
+E:\MyProject\Utility2\Utility2\obj\Debug\Utility2.Properties.Resources.resources
+E:\MyProject\Utility2\Utility2\obj\Debug\Utility2.csproj.GenerateResource.Cache
+E:\MyProject\Utility2\Utility2\bin\Debug\Utility2.exe
+E:\MyProject\Utility2\Utility2\bin\Debug\Utility2.pdb
+E:\MyProject\Utility2\Utility2\obj\Debug\Utility2.exe
+E:\MyProject\Utility2\Utility2\obj\Debug\Utility2.pdb
