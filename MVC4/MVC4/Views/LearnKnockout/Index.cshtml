@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript" src="../../Scripts/knockout-2.0.0.js"></script>
+<div>you are click<span data-bind="text: countClick"></span></div>
+<input type="button" data-bind="click: increaseCount,disable: isLange" value="click"/>
+<div data-bind="visible: isLange">
+
+lon qua roi may
+<input type="button" data-bind="click: clearCount" value="clear" />
+</div>
+
+
+<script type="text/javascript">
+
+    function myVM() {
+        this.countClick = ko.observable(0);
+        //this.increaseCount = ko.computed(function () {
+        //    var temp = parseInt(this.countClick().toString());
+        //    return this.countClick(parseInt + 1);
+        //}, this);
+        this.increaseCount = function () { return this.countClick(this.countClick() + 1)};
+
+        this.isLange = ko.computed(function () {
+            return this.countClick() >= 4;
+        }, this);
+
+        this.clearCount = function () { this.countClick(0);};
+
+    };
+
+    ko.applyBindings(new myVM());
+</script>
