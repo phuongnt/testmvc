@@ -1,56 +1,78 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
+<head>
     <style>
-      body {
-        margin: 0px;
-        padding: 0px;
-      }
-      #myCanvas {
-        border: 1px solid #9C9898;
-      }
+        body
+        {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #myCanvas
+        {
+            border: 1px solid #9C9898;
+        }
     </style>
     <script>
-        function loadImages(sources, callback) {
-            var images = {};
+        function ImgLoader(sources, onProgressChanged, onCompleted) {
+            this.images = {};
             var loadedImages = 0;
-            var numImages = 0;
+            var totalImages = 0;
             // get num of sources
+            if (onProgressChanged || onCompleted)
+                for (var src in sources) {
+                    totalImages++;
+                }
+            var self = this;
             for (var src in sources) {
-                numImages++;
-            }
-            for (var src in sources) {
-                images[src] = new Image();
-                images[src].onload = function () {
-                    if (++loadedImages >= numImages) {
-                        callback(images);
+                this.images[src] = new Image();
+                this.images[src].onload = function () {
+                    loadedImages++;
+                    if (onProgressChanged) {
+                        var percent = Math.floor((loadedImages / totalImages) * 100);
+                        onProgressChanged(this, percent);
                     }
-                };
-                images[src].src = sources[src];
+                    if (onCompleted && loadedImages >= totalImages)
+                        onCompleted(self.images);
+                }
+                this.images[src].src = sources[src];
             }
         }
 
         window.onload = function (images) {
             var canvas = document.getElementById("myCanvas");
             var context = canvas.getContext("2d");
-
+            var barWidth = 200;
+            var barLeft = (canvas.width - barWidth) / 2;
+            context.fillRect(barLeft, 10, barWidth, 18);
+            context.fillStyle = "blue";
             var sources = {
-                darthVader: "http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg",
-                yoda: "http://www.html5canvastutorials.com/demos/assets/yoda.jpg"
+                img1: "images/1.jpg",
+                img2: "images/2.jpg",
+                
             };
+            var left = 100;
 
-            loadImages(sources, function (images1) {
-                context.fillStyle = "blue";
-                context.fillText("Hello World!", 0, 0);
-                context.stroke();
-                context.drawImage(images1.darthVader, 100, 30, 200, 137);
-                context.drawImage(images1.yoda, 350, 55, 93, 104);
-            });
+            var foo = new ImgLoader(sources,
+		    function (image, percent) {
+		        context.drawImage(image, left, 55, 50, 50);
+		        //context.clearRect(0,0,200,30);
+		        context.fillStyle = "blue";
+		        context.fillRect(barLeft, 12, percent * barWidth / 100, 12);
+		        context.fillStyle = "white";
+		        context.fillText("Loading: " + percent + "%", barLeft + 10, 22);
+		        left += 60;
+		    },
+		    function (images) {
+		        // completed
+		    }
+	    );
         };
 
+
     </script>
-  </head>
-  <body>
+</head>
+<body>
     <canvas id="myCanvas" width="578" height="200"></canvas>
-  </body>
+</body>
 </html>
