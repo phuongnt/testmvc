@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Sandbox</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <script src="jquery-1.5.2.js" type="text/javascript"></script>
+    <script src="jquery-ui-1.8.11.js" type="text/javascript"></script>
+    <link href="../jquery-ui-1.8.14.custom/development-bundle/themes/base/jquery.ui.all.css"
+        rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+
+            $('table.tblSimpleAgenda tr').each(function () {
+                var tr = this;
+                var counter = 0;
+
+                $('td', tr).each(function (index, value) {
+                    var td = $(this);
+
+                    if (td.text() == "") {
+                        counter++;
+                        td.remove();
+                    }
+                });
+
+                if (counter !== 0) {
+                    $('td:not(.colTime):first', tr)
+        .attr('colSpan', '' + parseInt(counter + 1, 10) + '');
+                }
+            });
+
+            $('td.colspans').each(function () {
+                var td = $(this);
+                var colspans = [];
+
+                td.siblings().each(function () {
+                    colspans.push(($(this).attr('colSpan')) == null ? 1 : $(this).attr('colSpan'));
+                });
+
+                td.text(colspans.join(','));
+            });
+
+        });
+    </script>
+    <style type='text/css'>
+        .selectable .ui-selecting
+        {
+            background: #FECA40;
+        }
+        .selectable .ui-selected
+        {
+            background: #F39814;
+            color: white;
+        }
+        .NCList table
+        {
+            table-layout: fixed;
+        }
+        .nc-cell
+        {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .NCList .ui-resizable-e
+        {
+            background: gray;
+        }
+        .NCList .y-scroll
+        {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var element = $('#MyParentDiv');
+            $(".selectable", element).selectable({ filter: 'tr' });
+            $(".th0", element).resizable({
+                alsoResize: '#MyParentDiv .header-container',
+                stop: function (event, ui) {
+                    var width1 = $(".th0", element).width();
+                    $('.col0', element).width(width1);
+                    width1 = $(".header-container", element).width();
+                    $('.y-scroll', element).width(width1);
+                },
+                handles: 'e'
+            });
+            $(".th1", element).resizable({
+                alsoResize: '#MyParentDiv .header-container',
+                stop: function (event, ui) {
+                    var width1 = $(".th1", element).width();
+                    $('.col1', element).width(width1);
+                    width1 = $(".header-container", element).width();
+                    $('.y-scroll', element).width(width1);
+                },
+                handles: 'e'
+            });
+            alert($("#TestInput").val());
+        });
+
+    </script>
+</head>
+<body>
+    <div>
+        <input type="text" value="abc" id="TestInput" />
+    </div>
+    <div id="MyParentDiv" class="NCList">
+        <div class="header-container" style="width: 215px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="nc-cell th0" style="width: 100px;">
+                                Short name
+                            </div>
+                        </th>
+                        <th>
+                            <div class="nc-cell th1" style="width: 100px;">
+                                Name
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="y-scroll" style="max-height: 100px; width: 215px;">
+            <table class="valuefield">
+                <tbody class="selectable">
+                    <tr>
+                        <td>
+                            <div class="nc-cell col0" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                        <td>
+                            <div class="nc-cell col1" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="nc-cell col0" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                        <td>
+                            <div class="nc-cell col1" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="nc-cell col0" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                        <td>
+                            <div class="nc-cell col1" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="nc-cell col0" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                        <td>
+                            <div class="nc-cell col1" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="nc-cell col0" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                        <td>
+                            <div class="nc-cell col1" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="nc-cell col0" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                        <td>
+                            <div class="nc-cell col1" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="nc-cell col0" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                        <td>
+                            <div class="nc-cell col1" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="nc-cell col0" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                        <td>
+                            <div class="nc-cell col1" style="width: 100px">
+                                Some test values</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<html>

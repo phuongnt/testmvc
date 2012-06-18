@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+ 
+<script type="text/javascript" src="js/jquery-1.6.js"></script>
+
+ <script type="text/javascript">
+     $().ready(function () {
+//         $.getJSON("a.txt", { "dsaf": "daf" }, function (result) {
+//             $("#fname").text(obj.result[0].firstName);
+//             $("#lname").text(obj.result[2].abc);
+//         });
+//         $('#phuong').load("a.txt", { "daf": "das" }, function (result, status, xhr) {
+
+//         });
+         $.ajax({url:"a.txt", success:function (rs) { $('#phuong').text(rs); }});
+     });
+ </script>
+ </head>
+<body>
+<h2>Create Object from JSON String</h2>
+<p>
+First Name: <span id="fname"></span><br /> 
+Last Name: <span id="lname"></span><br /> 
+</p> 
+ <div id="phuong"> </div>
+</body>
+</html>
+
+

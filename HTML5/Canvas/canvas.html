@@ -1,0 +1,70 @@
+<html>
+  <head>
+  <title></title>
+
+    <script type="text/javascript" src="MenuItem.js"></script> 
+    <script type="text/javascript" src="Screen.js"></script>
+	 
+    <script>
+
+	window.onload = function()
+	{
+		var width = 400;
+		var height = 400;
+
+		var canvas = document.getElementById("canvas");
+		canvas.width = 400;
+		canvas.height = 400;
+
+		// create the help screen
+		var helpScreen,welcomeScreen;
+		helpScreen = new Screen(canvas);
+		helpScreen.afterDraw = function(context){
+			context.fillStyle = "white";
+			context.fillText("HELP",200,30);
+		};
+		helpScreen.addItem(new MenuItem({
+				left: 100,
+				top: 180,
+				width: 200,
+				height: 40,
+				text: "Back",
+				onclick: function(){
+					// back to welcome screen
+					helpScreen.stop();
+					welcomeScreen.start();
+				}
+			}));
+
+		// create the welcome screen
+		welcomeScreen = new Screen(canvas);
+		var titles = ["Play","Help","Visit My Blogs"];
+
+		for(var i=0;i<titles.length;i++){
+			welcomeScreen.addItem(new MenuItem({
+				left: 100,
+				top: 100+50*i,
+				width: 200,
+				height: 40,
+				text: titles[i]
+			}));
+		}
+		welcomeScreen.items[0].onclick = function(){
+			alert("You clicked the Play item.");
+		};
+		welcomeScreen.items[1].onclick = function(){
+			helpScreen.start();
+			welcomeScreen.stop();
+		};
+		welcomeScreen.items[2].onclick = function(){
+			window.open('http://yinyangit.wordpress.com', '_blank');
+		};
+		welcomeScreen.start();
+	}
+    </script>
+  </head>
+
+  <body>
+	<canvas id="canvas" tabindex="0" style="margin:0px; border: 1px solid"> </canvas>
+  </body>
+</html>

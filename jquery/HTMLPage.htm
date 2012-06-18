@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="jquery-1.5.2.js" type="text/javascript"></script>
+    <style>
+        body
+        {
+            font-size: 16px;
+            font-weight: bolder;
+        }
+        p
+        {
+            margin: 5px 0;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+    <div id="conmeno">
+        <span>Hello</span>
+        <p class="selected">
+            Hello Again</p>
+        <div class="selected">
+            And Again</div>
+        <div class="selected">
+            <div class="kkkk">
+                xxxxxx</div>
+            And Again agiandsf</div>
+        And One Last Time
+    </div>
+    <script>        $('#conmeno').click(function () {
+
+            $(this).children('div').children(".kkkk").css("color", "red");
+
+        });     </script>
+</body>
+</html>

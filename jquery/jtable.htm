@@ -1,0 +1,657 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jquery-1.6.js" type="text/javascript"></script>
+    <!--<script src="jquery-ui-1.8.13.custom.js" type="text/javascript"></script>-->
+    <script src="jquery-ui-1.8.11.js" type="text/javascript"></script>
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="css/flexigrid.css" rel="stylesheet" type="text/css" />
+    <script src="js/flexigrid.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+            var mytext = $('.text').text().substr(0, 15);
+            $('.showText').text(mytext.toString());
+            $('a').click(function (event) {
+                event.preventDefault();
+
+                $('#confirmDialog').dialog('option', 'href', this.href).dialog('open');
+            });
+            $('#confirmDialog').dialog({
+                autoOpen: false,
+                modal: true,
+                overlay: {
+                    backgroundColor: '#000',
+                    opacity: 0.5
+                },
+                buttons: {
+                    Ok: function () {
+                        var href = $(this).dialog('option', 'href');
+                        window.location.href = href;
+                    },
+                    Đóng: function () {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+        })
+     
+    </script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("button, input:submit, a", ".demo").button().end().css({ 'font-size': '9pt' });
+            $('div', '.demo').css({ 'color': 'red' });
+
+
+            $("#flex1").flexigrid({
+                url: '',
+                dataType: 'json',
+                colModel: [
+		{ display: 'ISO', name: 'iso', width: 40, sortable: true, align: 'center' },
+		{ display: 'Name', name: 'name', width: 180, sortable: true, align: 'left' },
+		{ display: 'Printable Name', name: 'printable_name', width: 120, sortable: true, align: 'left' },
+		{ display: 'ISO3', name: 'iso3', width: 130, sortable: true, align: 'left', hide: true },
+		{ display: 'Number Code', name: 'numcode', width: 80, sortable: true, align: 'right' }
+		],
+                buttons: [
+		{ name: 'Add', bclass: 'add', onpress: test },
+		{ name: 'Delete', bclass: 'delete', onpress: test },
+		{ separator: true }
+		],
+                searchitems: [
+		{ display: 'ISO', name: 'iso' },
+		{ display: 'Name', name: 'name', isdefault: true }
+		],
+                sortname: "iso",
+                sortorder: "asc",
+                usepager: true,
+                title: 'Countries',
+                useRp: true,
+                rp: 15,
+                showTableToggleBtn: true,
+                width: 700,
+                height: 500
+            });
+
+
+
+
+        });
+
+
+        
+  
+    </script>
+    <style type="text/css">
+        table
+        {
+            font-size: 1em;
+        }
+        /* Site
+   -------------------------------- */body
+        {
+            font-family: "Trebuchet MS" , "Helvetica" , "Arial" , "Verdana" , "sans-serif";
+        }
+    </style>
+</head>
+<body>
+    <div class="text" value="122">
+        thu nghiem thoy
+    </div>
+    <div class="showText">
+    </div>
+    <a href="6tipJ.htm">6tipj.html</a>
+    <div id='confirmDialog' title='Confirm'>
+        <p>
+            <span class='ui-icon ui-icon-alert' style='float: left; margin: 0 7px 20px 0;'></span>
+            Are you sure you want to abandon your changes?
+        </p>
+    </div>
+    <input id="b4" name="b4" type="button" value="show button" />
+    <button>
+        abc</button>
+    <div class="demo">
+        <button>
+            A button element</button>
+        <input type="submit" value="A submit button" />
+        <a href="#">An anchor</a> <span>
+            <div>
+                thu ngheim
+            </div>
+        </span>
+    </div>
+    <div>
+        thu ngheim
+    </div>
+    <div style="width: 700px;" class="flexigrid">
+        <div style="left: 227px; top: 50px; display: none;" title="Hide/Show Columns" class="nBtn">
+            <div>
+            </div>
+        </div>
+        <div style="margin-bottom: -200px; display: none; top: 75px; -moz-user-select: none;
+            height: auto; width: auto; left: 227px;" class="nDiv">
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td class="ndcol1">
+                            <input checked="checked" class="togCol" value="0" type="checkbox">
+                        </td>
+                        <td class="ndcol2">
+                            ISO
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ndcol1">
+                            <input checked="checked" class="togCol" value="1" type="checkbox">
+                        </td>
+                        <td class="ndcol2">
+                            Name
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ndcol1">
+                            <input checked="checked" class="togCol" value="2" type="checkbox">
+                        </td>
+                        <td class="ndcol2">
+                            Printable Name
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ndcol1">
+                            <input checked="checked" class="togCol" value="3" type="checkbox">
+                        </td>
+                        <td class="ndcol2">
+                            ISO3
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ndcol1">
+                            <input checked="checked" class="togCol" value="4" type="checkbox">
+                        </td>
+                        <td class="ndcol2">
+                            Number Code
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mDiv">
+            <div class="ftitle">
+                Countries</div>
+            <div class="ptogtitle" title="Minimize/Maximize Table">
+                <span></span>
+            </div>
+        </div>
+        <div class="tDiv">
+            <div class="tDiv2">
+                <div class="fbutton">
+                    <div>
+                        <span style="padding-left: 20px;" class="add">Add</span></div>
+                </div>
+                <div class="fbutton">
+                    <div>
+                        <span style="padding-left: 20px;" class="delete">Delete</span></div>
+                </div>
+                <div class="btnseparator">
+                </div>
+            </div>
+            <div style="clear: both;">
+            </div>
+        </div>
+        <div class="hDiv">
+            <div class="hDivBox">
+                <table cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="sorted" axis="col0" abbr="iso" align="center">
+                                <div style="text-align: center; width: 40px;" class="sasc">
+                                    ISO</div>
+                            </th>
+                            <th class="" axis="col1" abbr="name" align="left">
+                                <div class="" style="text-align: left; width: 180px;">
+                                    Name</div>
+                            </th>
+                            <th class="" axis="col2" abbr="printable_name" align="left">
+                                <div class="" style="text-align: left; width: 120px;">
+                                    Printable Name</div>
+                            </th>
+                            <th class="" axis="col3" abbr="iso3" align="left">
+                                <div class="" style="text-align: left; width: 130px;">
+                                    ISO3</div>
+                            </th>
+                            <th class="" axis="col4" abbr="numcode" align="right">
+                                <div class="" style="text-align: right; width: 80px;">
+                                    Number Code</div>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div style="top: 51px;" class="cDrag">
+            <div style="height: 224px; display: block; left: 49px;">
+            </div>
+            <div style="height: 224px; display: block; left: 240px;">
+            </div>
+            <div style="height: 224px; display: block; left: 371px;">
+            </div>
+            <div style="height: 224px; display: block; left: 512px;">
+            </div>
+            <div style="height: 224px; display: block; left: 603px;">
+            </div>
+        </div>
+        <div style="height: 200px;" class="bDiv">
+            <table class="flexme3" style="" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr id="rowAD">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AD</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Andorra</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Andorra</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                AND</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                20</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAE" class="erow">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AE</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                United Arab Emirates</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                United Arab Emirates</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                ARE</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                784</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAF">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AF</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Afghanistan</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Afghanistan</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                AFG</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                4</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAG" class="erow">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AG</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Antigua and Barbuda</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Antigua and Barbuda</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                ATG</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                28</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAI">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AI</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Anguilla</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Anguilla</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                AIA</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                660</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAL" class="erow">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AL</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Albania</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Albania</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                ALB</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                8</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAM">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AM</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Armenia</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Armenia</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                ARM</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                51</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAN" class="erow">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AN</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Netherlands Antilles</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Netherlands Antilles</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                ANT</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                530</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAO">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AO</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Angola</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Angola</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                AGO</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                24</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAQ" class="erow">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AQ</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Antarctica</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Antarctica</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                ART</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                0</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAR">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AR</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Argentina</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Argentina</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                ARG</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                32</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAS" class="erow">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AS</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                American Samoa</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                American Samoa</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                ASM</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                16</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAT">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AT</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Austria</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Austria</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                AUT</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                40</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAU" class="erow">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AU</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Australia</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Australia</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                AUS</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                36</div>
+                        </td>
+                    </tr>
+                    <tr id="rowAW">
+                        <td class="sorted" abbr="iso" align="center">
+                            <div style="text-align: center; width: 40px;">
+                                AW</div>
+                        </td>
+                        <td abbr="name" align="left">
+                            <div style="text-align: left; width: 180px;">
+                                Aruba</div>
+                        </td>
+                        <td abbr="printable_name" align="left">
+                            <div style="text-align: left; width: 120px;">
+                                Aruba</div>
+                        </td>
+                        <td abbr="iso3" align="left">
+                            <div style="text-align: left; width: 130px;">
+                                ABW</div>
+                        </td>
+                        <td abbr="numcode" align="right">
+                            <div style="text-align: right; width: 80px;">
+                                533</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="display: none;" class="iDiv">
+            </div>
+        </div>
+        <div class="sDiv">
+            <div class="sDiv2">
+                Find
+                <input value="" size="30" name="q" class="qsbox" type="text">
+                <select name="qtype">
+                    <option value="iso">ISO&nbsp;&nbsp;</option>
+                    <option value="name" selected="selected">Name&nbsp;&nbsp;</option>
+                </select></div>
+        </div>
+        <div class="pDiv">
+            <div class="pDiv2">
+                <div class="pGroup">
+                    <div class="pSearch pButton">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="btnseparator">
+                </div>
+                <div class="pGroup">
+                    <select name="rp">
+                        <option value="10">10&nbsp;&nbsp;</option>
+                        <option value="15" selected="selected">15&nbsp;&nbsp;</option>
+                        <option value="20">20&nbsp;&nbsp;</option>
+                        <option value="30">30&nbsp;&nbsp;</option>
+                        <option value="50">50&nbsp;&nbsp;</option>
+                    </select></div>
+                <div class="btnseparator">
+                </div>
+                <div class="pGroup">
+                    <div class="pFirst pButton">
+                        <span></span>
+                    </div>
+                    <div class="pPrev pButton">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="btnseparator">
+                </div>
+                <div class="pGroup">
+                    <span class="pcontrol">Page
+                        <input size="4" value="1" type="text">
+                        of <span>16</span></span></div>
+                <div class="btnseparator">
+                </div>
+                <div class="pGroup">
+                    <div class="pNext pButton">
+                        <span></span>
+                    </div>
+                    <div class="pLast pButton">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="btnseparator">
+                </div>
+                <div class="pGroup">
+                    <div class="pReload pButton">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="btnseparator">
+                </div>
+                <div class="pGroup">
+                    <span class="pPageStat">Displaying 1 to 15 of 239 items</span></div>
+            </div>
+            <div style="clear: both;">
+            </div>
+        </div>
+        <div class="vGrip">
+            <span></span>
+        </div>
+        <div style="height: 307px;" class="hGrip">
+            <span></span>
+        </div>
+    </div>
+</body>
+</html>

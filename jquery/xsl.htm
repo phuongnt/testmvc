@@ -1,0 +1,42 @@
+﻿<html>
+<head>
+ <script src="js/jquery-1.6.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function loadXMLDoc(dname) {
+        if (window.XMLHttpRequest) {
+            xhttp = new XMLHttpRequest();
+        }
+        else {
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhttp.open("GET", dname, false);
+        xhttp.send("");
+        return xhttp.responseXML;
+    }
+
+    function displayResult() {
+        xml = loadXMLDoc("xsl/cdcatalog.xml");
+        xsl1 = loadXMLDoc("xsl/cdcatalog.xsl");
+        // code for IE
+        if (window.ActiveXObject) {
+            ex = xml.transformNode(xsl1);
+            document.getElementById("example").innerHTML = ex;
+        }
+        // code for Mozilla, Firefox, Opera, etc.
+        else if (document.implementation && document.implementation.createDocument) {
+            xsltProcessor = new XSLTProcessor();
+            xsltProcessor.importStylesheet(xsl1);
+            resultDocument = xsltProcessor.transformToFragment(xml, document);
+            document.getElementById("example").appendChild(resultDocument);
+        }
+    }
+    $().ready(function () {
+        displayResult()
+    });
+</script>
+</head>
+<body>
+<div id="example" />
+</body>
+</html>
+

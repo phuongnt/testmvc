@@ -1,0 +1,11 @@
+﻿.title_h2
+{
+	color: #333333;
+	font-size: 17px;
+	line-height: 1.5em;
+	margin-bottom: 10px;
+}
+.f_wellcome
+{
+	padding: 20px;
+}

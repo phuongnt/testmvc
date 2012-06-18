@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+        <script src="jquery-1.6.js" type="text/javascript"></script>   
+    <script src="jquery-ui-1.8.11.js" type="text/javascript"></script>
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <script src="jquery.illuminate.0.7.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+//        $(document).ready(function () {
+
+//            $('#button').illuminate();
+
+//        });
+
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#button').illuminate({
+
+            'intensity': '0.3',
+
+            'color': '#98cb00',
+
+            'blink': 'true',
+
+            'blinkSpeed': '900',
+
+            'outerGlow': 'true',
+
+            'outerGlowSize': '50px',
+
+            'outerGlowColor': '#98cb00'
+
+        });
+        $('#signup').illuminate();
+        $('#login').illuminate();
+        $('#intense').illuminate({
+            'intensity': '0.3'
+        });
+
+        $('#inputtext').illuminate();
+    });
+
+</script>
+<style>
+#signup
+{
+	background:#98cb00;
+}
+
+#login
+{
+	background:#0098cb;
+	margin-left:20px;
+}
+
+#intense
+{
+	background:#ff9a00;
+	margin-left:20px;
+}
+#demo_content
+{
+	background:black;
+	width:554px;
+	margin:0px auto;
+	border:1px solid #565656;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;	
+	-webkit-box-shadow: inset 0 0 45px #000000; 
+	-moz-box-shadow: 0 0 5px #000000; 
+	box-shadow:0 0 5px #000000;
+	
+	position:relative;
+	height:auto;
+	display:block;
+	
+	padding:20px;
+
+}
+
+
+.button
+{
+	float:left;
+	width:auto;
+	height:30px;
+	font-family:'Yanone Kaffeesatz', Helvetica, Arial;
+	font-weight:normal;
+	color:#ffffff;
+	font-size:30px;
+	display:inline-table;
+	padding:5px 15px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	cursor:pointer;
+}
+
+#signup
+{
+	background:#98cb00;
+}
+
+#login
+{
+	background:#0098cb;
+	margin-left:20px;
+}
+
+#intense
+{
+	background:#ff9a00;
+	margin-left:20px;
+}
+
+#static
+{
+	background:#00ff00;
+	margin-left:20px;
+}
+
+.inputtypes
+{
+	display:inline-table;
+	font-family:'Yanone Kaffeesatz', Helvetica, Arial;
+	font-weight:normal;
+	font-size:25px;
+	padding:8px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	color:#545454;
+	margin-top:0px;
+	margin-left:20px;
+	position:relative;
+}
+
+#inputtext
+{
+}
+</style>
+</head>
+<body>
+<div id="button" style="background:#98cb00">Click Me</div>
+
+<div id="demo_content">
+				<div style="background-color: rgb(168, 219, 16);" id="signup" class="button">SIGN UP</div>
+				<div style="background-color: rgb(16, 168, 219);" id="login" class="button">LOGIN</div>
+				<div style="background-color: rgb(255, 234, 80);" id="intense" class="button">INTENSE!</div>
+				<input style="border: medium none; background-color: rgb(255, 255, 255);" id="inputtext" class="inputtypes" value="textbox..." onclick="this.value='';" onfocus="javascript: if (formfield.defaultValue==formfield.value)formfield.value = ''" onblur="this.value=!this.value?'textbox...':this.value;" type="text">
+				
+				
+			</div>
+</body>
+</html>

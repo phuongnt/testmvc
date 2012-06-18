@@ -1,0 +1,50 @@
+﻿@model MVC4.data.Airline
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Airline</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AirlineCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AirlineCode)
+            @Html.ValidationMessageFor(model => model.AirlineCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AvailableNames)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AvailableNames)
+            @Html.ValidationMessageFor(model => model.AvailableNames)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

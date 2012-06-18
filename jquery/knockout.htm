@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Flexigrid</title>
+    <script src="jquery-1.6.js" type="text/javascript"></script>
+    <script src="js/knockout-1.2.1.js" type="text/javascript"></script>
+    <style type="text/css">
+        .a
+        {
+        }
+    </style>
+    <script type="text/javascript">
+        var domContext = $('#content')[0]; // Get the DOM element
+
+        var selector = $('p:first', domContext).selector;
+
+        var context = $('p:first', domContext).context;
+        alert(context);
+
+    </script>
+</head>
+<body>
+    <!--    First Name:
+    <input type="text" data-bind="value: firstName,valueUpdate : 'afterkeydown'" />
+    <br />
+    Last Name:
+    <input type="text" data-bind="value: lastName,valueUpdate : 'afterkeydown'" />
+    <br />
+    Full Name:
+    <input type="text" data-bind="value: Fullname" />
+    <br />
+    <script type="text/javascript">
+
+        var viewModel = {
+            firstName: ko.observable("phuong"),
+            lastName: ko.observable("phuong")
+        };
+        viewModel.Fullname = ko.dependentObservable(function () {
+            return this.firstName() + " " + this.lastName();
+        }, viewModel);
+
+        ko.applyBindings(viewModel);
+
+    </script>-->
+    <div>
+        <a href="a.html" title="tooltip">testing </a>
+    </div>
+    <div id="testing">
+        <div>
+            xxx</div>
+        abc</div>
+    <form data-bind="submit: addItem">
+    New item:
+    <input data-bind='value: itemToAdd, valueUpdate: "afterkeydown"' />
+    <button type="submit" data-bind="enable: itemToAdd().length > 0">
+        Add</button>
+    <p>
+        Your items:</p>
+    <select multiple="multiple" width="50" data-bind="options: items">
+    </select>
+    </form>
+    <script type="text/javascript">
+        var viewModel1 = {};
+        viewModel1.items = ko.observableArray(["Alpha", "Beta", "Gamma"]);
+        viewModel1.itemToAdd = ko.observable("");
+        viewModel1.addItem = function () {
+            if (viewModel1.itemToAdd() != "") {
+                viewModel1.items.push(viewModel1.itemToAdd()); // Adds the item. Writing to the "items" observableArray causes any associated UI to update.
+                viewModel1.itemToAdd("");                     // Clears the text box, because it's bound to the "itemToAdd" observable
+            }
+        }
+
+        ko.applyBindings(viewModel1);
+    </script>
+</body>
+</html>

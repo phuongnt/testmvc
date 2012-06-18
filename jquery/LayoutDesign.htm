@@ -1,0 +1,406 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jquery-1.5.2.js" type="text/javascript"></script>
+    <!--<script src="jquery-ui-1.8.11.js" type="text/javascript"></script>-->
+    <script src="js/jquery-ui-1.8.16.custom.js" type="text/javascript"></script>
+    <script src="js/jquery.contextMenu-1.01/jquery.contextMenu.js" type="text/javascript"></script>
+    <!--    <link href="../jquery-ui-1.8.14.custom/development-bundle/themes/base/jquery.ui.all.css"
+        rel="stylesheet" type="text/css" />-->
+    <link href="../jquery-ui-1.8.14.custom/development-bundle/themes/base/jquery.ui.resizable.css"
+        rel="stylesheet" type="text/css" />
+    <link href="js/jquery.contextMenu-1.01/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+    <!--<link href="js/jquery.alerts-1.1/jquery.alerts.css" rel="stylesheet" type="text/css" />-->
+    <script src="js/jquery.alerts-1.1/jquery.alerts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            loadMenuContext();
+            SetValueCol("table1");
+            //begin selectable for colums
+            $("#table1").selectable({ filter: 'td', stop: function () {
+                $("#table1 tr td").each(function () {
+                    $(this).attr('myselected', 'false');
+                });
+                $(".ui-selected", this).each(function () {
+                    $(this).attr('myselected', 'true');
+                });
+                $(".ui-selected:first", this).each(function () {
+                    $("#selectedcolspan").blur();
+                    $("#selectedrowspan").blur();
+                    $("#selectedid").blur();
+                    $("#selectedcolspan").val($(this).attr("colspan"));
+                    $("#selectedrowspan").val($(this).attr("rowspan"));
+                    $("#selectedid").val($(this).attr("id"));
+
+                    $("#selectedColumn").val($(this).attr("id"));
+                });
+            }
+            });
+            //end selectable
+            //set resizable for columns
+            //$("#table1 tbody tr td").resizable({});
+
+        });                               //end ready
+        function selectedItem(id) {
+            this.idSelected = id;
+        }
+        //begin function Add row for table
+        function addTableRow(jQtable) {
+            // Number of td's in the last table row
+            var n = GetLengthColumns(jQtable);
+            var tds = '<tr>';
+            var nCell = GetSumCell(jQtable);
+            for (var i = 0; i < n; i++) {
+                tds += '<td colspan="1" rowspan="1" id="pane' + (nCell + i).toString() + '"> </td>';
+            }
+            tds += '</tr>';
+            if ($('tbody', jQtable).length > 0) {
+                $('tbody', jQtable).append(tds);
+            } else {
+                $('#' + jQtable).append(tds);
+            }
+            //$("#table1 tr td").resizable({});
+            loadMenuContext();
+            SetValueCol(jQtable);
+        }
+        //end function add row for table
+        //begin function Add column for table
+        function addTableColumn(jQtable) {
+            var count = 0;
+            var nCell = GetSumCell(jQtable);
+            $("#" + jQtable + " tr").each(function () {
+                count++;
+                $(this).append('<td colspan="1" rowspan="1" id="pane' + (nCell + count).toString() + '"></td>');
+            });
+            loadMenuContext();
+            SetValueCol(jQtable);
+        }
+        //end function add column for table
+        //begin function mergeColumns
+        function mergeColumns() {
+            var SumCol = 0;
+            var firstRowSelected = -1;
+            var lastRowSelected = -1;
+            var maxRowspanAll = 0;
+            $('#table1 tr').each(function () {
+                var tr = this;
+                var counter = 0;
+                var maxRowspan = 0;
+                $('td', tr).each(function (index, value) {
+                    var td = $(this);
+                    if (td.attr('myselected') == "true") {
+                        if (firstRowSelected == -1) {
+                            firstRowSelected = $(this).parent('tr').prevAll().length;
+                        }
+                        lastRowSelected = $(this).parent('tr').prevAll().length;
+                        counter += parseInt(td.attr('colspan'));
+                        if (maxRowspan < td.attr('rowspan')) {
+                            maxRowspan = td.attr('rowspan');
+
+                        }
+                        if (maxRowspanAll < maxRowspan) {
+                            maxRowspanAll = maxRowspan;
+                        }
+                    }
+                });
+                if (counter != 0) {
+                    if (SumCol < counter) {
+                        SumCol = counter;
+                    }
+                }
+                counter = 0;
+            });
+            SumRow = lastRowSelected - firstRowSelected + 1;
+            if (SumRow < maxRowspanAll) {
+                SumRow = maxRowspanAll;
+            }
+            var temp = "";
+            var arr = [];
+            $("#table1 tr td").each(function () {
+                var idSelected = $(this).attr('id');
+                var idTest = $(this).attr('myselected');
+                if (idTest == "true") {
+                    arr.push(new selectedItem(idSelected));
+                }
+            });
+            for (var i = 1; i < arr.length; i++) {
+                $('#' + arr[i].idSelected).remove();
+            }
+            if (arr.length > 0) {
+                $('#' + arr[0].idSelected).attr('colspan', SumCol);
+                $('#' + arr[0].idSelected).attr('rowspan', SumRow);
+                $('#' + arr[0].idSelected).attr('myselected', 'false');
+            }
+        }
+        //end function merge Columns
+        //begin funtion get max column row on table
+        function GetLengthColumns(table1) {
+            var table = document.getElementById(table1);
+            var max = 0;
+            for (var i = 0, iLen = table.rows.length; i < iLen; i++) {
+                var temp = 0;
+                var cells = table.rows[i].cells;
+                for (var j = 0, jLen = cells.length; j < jLen; j++) {
+                    temp += cells[j].colSpan;
+                }
+                if (temp > max) {
+                    max = temp;
+                }
+            }
+            return max;
+        }
+        //end funtion get max column row on table
+        //begin funtion get all cell in table
+        function GetSumCell(table1) {
+            var table = document.getElementById(table1);
+            var count = 0;
+            for (var i = 0, iLen = table.rows.length; i < iLen; i++) {
+                var cells = table.rows[i].cells;
+                for (var j = 0, jLen = cells.length; j < jLen; j++) {
+                    count++;
+                }
+
+            }
+            return count;
+        }
+        //end  funtion get all cell in table
+        //begin show id
+        function SetValueCol(table1) {
+            $("#" + table1 + " tr td").each(function () {
+                $(this).html("<div style='text-align:center;'>" + $(this).attr("id") + "</div>");
+            });
+        }
+        //end show id
+        //begin show pormpt chang ID's name
+        function showPromptChangeID(colID) {
+            var name = prompt("Please enter ID's name", $("#" + colID).text());
+            if (name != null && name != "") {
+                var isUnique = true;
+                $("#table1 tr td").each(function () {
+                    if ($(this).attr('id') != colID) {
+                        if ($(this).attr('id') == name) {
+                            isUnique = false;
+                        }
+                    }
+                });
+                if (isUnique == true) {
+                    $("#" + colID).html("<div style='text-align:center;'>" + name + "</div>");
+                    $("#" + colID).attr("id", name);
+                } else {
+                    alert("ID isn't available");
+                }
+            }
+        }
+        //end show pormpt chang ID's name
+        //begin function Load menu context
+        function loadMenuContext() {
+            $("#table1").contextMenu1({ menu: 'myMenu' }, function ActionMenu(action, el, pos) {
+                if (action == "merge") {
+                    mergeColumns();
+                }
+                else if (action == "addrow") {
+                    addTableRow('table1');
+                }
+                else if (action == "delete") {
+                    var arr = [];
+                    $("#table1 tr td").each(function () {
+                        var idSelected = $(this).attr('id');
+                        var isSelected = $(this).attr('myselected');
+                        if (isSelected == "true") {
+                            arr.push(new selectedItem(idSelected));
+                        }
+                    });
+                    if (arr.length == 1) {
+                        if ($("td", $('#' + arr[0].idSelected).parent()).length == 1) {
+                            $('#' + arr[0].idSelected).parent().remove();
+                        } else {
+                            $('#' + arr[0].idSelected).remove();
+                        }
+
+                    } else if (arr.length > 1) {
+                        alert("Please choose only one column");
+                    } else {
+                        alert("Please choose one column");
+                    }
+                }
+                else if (action == "addcolumn") {
+                    addTableColumn("table1");
+                } else if (action == "changID") {
+                    changID();
+                }
+            });
+            //begin changid function
+            function changID() {
+                var arr = [];
+                $("#table1 tr td").each(function () {
+                    var idSelected = $(this).attr('id');
+                    var isSelected = $(this).attr('myselected');
+                    if (isSelected == "true") {
+                        arr.push(new selectedItem(idSelected));
+                    }
+                });
+                if (arr.length == 1) {
+                    showPromptChangeID(arr[0].idSelected);
+                } else if (arr.length > 1) {
+                    alert("Please choose only one column");
+                } else {
+                    alert("Please choose one column");
+                }
+            }
+            //end function changid
+        }
+        //end function Load menu context
+        //begin column info
+        function saveCellInfo() {
+            var selectedColumn = $("#selectedColumn").val();
+            var selectedColspan = $("#selectedcolspan").val();
+            var selectedRowspan = $("#selectedrowspan").val();
+            var selectedIDName = $("#selectedid").val();
+            var isUnique = true;
+            //alert(selectedColumn.toString());
+
+            if (selectedColumn.toString() != "" && selectedColspan.toString() != "" && selectedRowspan.toString() != "" && selectedIDName.toString() != "") {
+                $("#table1 tr td").each(function () {
+                    if ($(this).attr('id') != selectedColumn) {
+                        if ($(this).attr('id') == selectedIDName) {
+                            isUnique = false;
+                        }
+                    }
+                });
+                if (isUnique == true) {
+                    $("#" + selectedColumn).attr('id', selectedIDName);
+                } else {
+                    alert(selectedIDName + " isn't available");
+                }
+                $("#" + selectedColumn).attr('colspan', selectedColspan);
+                $("#" + selectedColumn).attr('rowspan', selectedRowspan);
+                SetValueCol("table1");
+                $("#selectedColumn").val(selectedIDName);
+            }
+
+        }
+        //end column info
+
+        //begin show pormpt chang ID's name user jquery alert
+        function showPromptChangeIDNew(colID) {
+            //var name =prompt("Please enter ID's name", $("#" + colID).text());
+            jPrompt('Type something:', $("#" + colID).text(), 'Prompt Dialog', function (name) {
+                if (name != null && name != "") {
+                    var isUnique = true;
+                    $("#table1 tr td").each(function () {
+                        if ($(this).attr('id') != colID) {
+                            if ($(this).attr('id') == name) {
+                                isUnique = false;
+                            }
+                        }
+                    });
+                    if (isUnique == true) {
+                        $("#" + colID).html("<div style='text-align:center;'>" + name + "</div>");
+                        $("#" + colID).attr("id", name);
+                    } else {
+                        alert("ID isn't avaliable");
+                    }
+                }
+            });
+
+        }
+        //end show pormpt chang ID's name
+    </script>
+    <style type="text/css">
+        body
+        {
+            margin: 0px auto;
+            width: 1024px;
+        }
+
+        #table1
+        {
+            width: 100%;
+            height: 400px;
+        }
+        #table1 tr td
+        {
+            width: 100px;
+            height: 100px;
+            border: solid 1px #a1a1a1;
+        }
+        #table1 tr td:hover
+        {
+            cursor: pointer;
+            background-color: #FECA40;
+        }
+        #table1 .ui-selecting
+        {
+            background: #FECA40;
+        }
+        #table1 .ui-selected
+        {
+            background: #F39814;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>
+            Colspan</p>
+        <p>
+            <input id="selectedcolspan" onblur="saveCellInfo()" type="text" value="" /></p>
+        <p>
+            Rowspan</p>
+        <p>
+            <input id="selectedrowspan" onblur="saveCellInfo()" type="text" value="" /></p>
+        <p>
+            Id's name</p>
+        <p>
+            <input id="selectedid" onblur='saveCellInfo()' type="text" value="" /></p>
+        <input id="selectedColumn" type="hidden" value="" />
+        <div>
+            <input type="button" id="saveInfo" name="saveinfo" value="save" />
+        </div>
+    </div>
+    <ul id="myMenu" class="contextMenu">
+        <li><a href="#merge">Merge</a></li>
+        <li class="separator"><a href="#addrow">Add row</a></li>
+        <li><a href="#addcolumn">Add column</a></li>
+        <li><a href="#delete">Delete</a></li>
+        <li><a href="#changID">Chang ID Name</a></li>
+        <li class="copy"><a href="#copy">Copy</a></li>
+    </ul>
+    <table id="table1">
+        <tbody>
+            <tr>
+                <td id="Td1">
+                </td>
+                <td id="Td2">
+                </td>
+                <td id="Td3">
+                </td>
+                <td id="Td4">
+                </td>
+            </tr>
+            <tr>
+                <td id="Td5">
+                </td>
+                <td id="Td6">
+                </td>
+                <td id="Td7">
+                </td>
+                <td id="Td8">
+                </td>
+            </tr>
+            <tr>
+                <td id="Td9">
+                </td>
+                <td id="Td10">
+                </td>
+                <td id="Td11">
+                </td>
+                <td id="Td12">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

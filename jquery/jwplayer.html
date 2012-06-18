@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jwplayer/jwplayer.js" type="text/javascript"></script>
+    <script src="jwplayer/swfobject.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id='player'>
+        Get Flash to see the video</div>
+    <script type="text/javascript">
+        jwplayer("player").setup({
+            file: 'jwplayer/a.mp4',
+            flashplayer: 'jwplayer/player.swf',
+            plugins: {
+                'hd-2': {
+                    file: 'jwplayer/file3.mp4'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

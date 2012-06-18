@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title> 
+    <script src="jquery-1.6.js" type="text/javascript"></script>
+    <script src="js/jquery-jquery-tmpl-vBeta1.0.0-34-g07d08cb(1)/jquery-jquery-tmpl-07d08cb/jquery.tmpl.js"
+        type="text/javascript"></script>
+ <style>
+ table { border-collapse: collapse; }
+table tr { color: blue; height: 25px; }
+.header { color: #009; border-bottom: solid #77c 2px; background-color: #E8E8F7; }
+.header th { padding:5px; border: 1px solid #77c; }
+#movieList tr td:first-child { width: 100px; }
+table { border: 2px solid blue; width: 480px; margin: 4px 0 4px 4px; padding: 2px; background-color: #f8f8f8; }
+table td { padding: 3px; margin: 3px; border: solid #77c 1px; }
+ 
+ </style>
+</head>
+<body>
+    <script id="movieTemplate" type="text/x-jquery-tmpl"> 
+	<tr>
+		<td>${Title}</td>
+		<td>
+			{{tmpl(Languages) "#languageTemplate"}}
+		</td>
+        <td>
+        
+        {{tmpl(author) "#authorTemplate"}}
+        </td>
+	</tr>
+</script> 
+ 
+<script id="languageTemplate" type="text/x-jquery-tmpl"> 
+	<div>${Name}</div>
+</script>  
+ <script id="authorTemplate" type="text/x-jquery-tmpl">
+ <div style="color:blue;">${Name}</div>
+ </script>
+<div class="height"> 
+<table><tbody class="header"><tr><th>Title</th><th>Languages</th><th>author</th></tr></tbody> 
+	<tbody id="movieList"></tbody> 
+</table> 
+</div>  
+<script type="text/javascript">
+    var movies = [
+		{
+		    Title: "Meet Joe Black",
+		    Languages: [
+				{ Name: "English" },
+				{ Name: "French" }
+			],
+		    author: [{ Name: "Bo" }, { Name: "Hoang" }, { Name: "cho"}]
+		},
+		{
+		    Title: "Eyes Wide Shut",
+		    Languages: [
+				{ Name: "French" },
+				{ Name: "German" },
+				{ Name: "Spanish" }
+			],
+		    author: [{Name: "long"},{Name: "Bao"},{Name:"cho"}]
+		}
+	];
+    $("#movieTemplate").tmpl(movies)
+		.appendTo("#movieList"); 
+</script> 
+
+
+
+
+
+<script id="Script1" type="text/x-jquery-tmpl"> 
+	<tr>
+		<td>${Title}</td>
+		<td>
+			{{if Languages}}
+				Alternative languages: <em>${Languages}</em>.
+			{{else Subtitles}}
+				Original language only... <br/>Subtitles in <em>${Subtitles}</em>.
+			{{else}}
+				Original version only, without subtitles.
+			{{/if}}
+		</td>
+	</tr>
+</script> 
+
+<table><tbody class="header"><tr><th>Synopsis</th><th>Title</th></tr></tbody> 
+	<tbody id="Tbody1"></tbody> 
+</table> 
+ 
+<script type="text/javascript">
+
+    var movies = [
+		{
+		    Title: "Meet Joe Black",
+		    Languages: "English and French",
+		    Subtitles: "English"
+		},
+		{
+		    Title: "Eyes Wide Shut",
+		    Subtitles: "French and Spanish"
+		},
+		{
+		    Title: "The Mighty"
+		},
+		{
+		    Title: "City Hunter",
+		    Languages: "Mandarin and Chinese"
+		}
+	];
+
+		$("#Script1").tmpl(movies)
+		.appendTo("#Tbody1");
+ 
+</script> 
+
+
+</body>
+</html>

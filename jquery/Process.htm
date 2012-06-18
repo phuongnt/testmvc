@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jquery-1.5.2.js" type="text/javascript"></script>
+    <!--<script src="jquery-ui-1.8.11.js" type="text/javascript"></script>-->
+    <!--  <script src="js/jquery-ui-1.8.16.custom.js" type="text/javascript"></script>-->
+    <script src="js/admin.js" type="text/javascript"></script>
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+            $("#progressbar").progressbar({
+                value: 37
+            });
+            $("#fly").draggable();
+            $("#fly").css({ 'left': $("#progressbar .ui-progressbar-value").width() - 27 });
+            $("#change_process").click(function () {
+                $("#progressbar").progressbar("value", $("#progressbar").progressbar("value") + 5);
+                //                $("#fly").css({ 'left': $("#fly").position().left + 5 });
+
+                $("#fly").css({ 'left': $("#progressbar .ui-progressbar-value").width() - 27 });
+            });
+        });
+
+    </script>
+    <style type="text/css">
+        #fly
+        {
+            position: absolute;
+            left: 400px;
+            top: -10px;
+        }
+        #xxx
+        {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="xxx">
+        <div id="fly">
+            <img src="images/fly.png" /></div>
+        <div style="margin-top: 20px;" id="progressbar">
+        </div>
+    </div>
+    <div>
+        <input id="change_process" type="button" value="change" /></div>
+</body>
+</html>

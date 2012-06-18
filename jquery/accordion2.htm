@@ -1,0 +1,108 @@
+﻿!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="js/jquery-1.6.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        (function (j) {
+            j.fn.extend({ accordion: function () {
+                return this.each(function () {
+                    function b(c, b) { $(c).parent(d).siblings().removeClass(e).children(f).slideUp(g); $(c).siblings(f)[b || h](b == "show" ? g : !1, function () { $(c).siblings(f).is(":visible") ? $(c).parents(d).not(a.parents()).addClass(e) : $(c).parent(d).removeClass(e); b == "show" && $(c).parents(d).not(a.parents()).addClass(e); $(c).parents().show() }) } var a = $(this), e = "active", h = "slideToggle", f = "ul, div", g = "fast", d = "li"; if (a.data("accordiated")) return !1; $.each(a.find("ul, li>div"),
+function () { $(this).data("accordiated", !0); $(this).hide() }); $.each(a.find("a"), function () { $(this).click(function () { b(this, h) }); $(this).bind("activate-node", function () { a.find(f).not($(this).parents()).not($(this).siblings()).slideUp(g); b(this, "slideDown") }) }); var i = location.hash ? a.find("a[href=" + location.hash + "]")[0] : a.find("li.current a")[0]; i && b(i, !1)
+                })
+            }
+            })
+        })(jQuery);
+
+
+    </script>
+    <script type="text/javascript">
+        $().ready(function () {
+            $('.accordion').accordion();
+        });
+        
+    </script>
+    <style>
+        .accordion
+        {
+            background:
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 30px;
+            border: 1px solid #17a;
+            border-top: none;
+            border-left: none;
+        }
+        .accordion ul
+        {
+            padding: 0;
+            margin: 0;
+            float: left;
+            display: block;
+            width: 100%;
+        }
+        .accordion li
+        {
+            background: #3cf;
+            cursor: pointer;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            float: left;
+            display: block;
+            width: 100%;
+        }
+        .accordion li.active > a
+        {
+            background: url('close.gif') no-repeat center right;
+        }
+        .accordion li div
+        {
+            padding: 20px;
+            background: #aef;
+            display: block;
+            clear: both;
+            float: left;
+            width: 360px;
+        }
+        .accordion a
+        {
+            text-decoration: none;
+            border-bottom: 1px solid #4df;
+            font: bold 1.1em/2em Arial, sans-serif;
+            color: #222;
+            padding: 0 10px;
+            display: block;
+            cursor: pointer;
+            background: url('open.gif') no-repeat center right;
+        }
+        
+        /* Level 2 */
+        .accordion li ul li
+        {
+            background: #7FD2FF;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <ul class="accordion">
+        <li><a href="#america">America</a>
+            <ul>
+                <li><a href="#america-newyork">New York</a>
+                    <div>
+                        Information about New York</div>
+                </li>
+                <li><a href="#america-sanfransisco">San Fransisco</a>
+                    <div>
+                        Information about San Fransisco</div>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#antarctica">Antarctica</a>
+            <div>
+                Information about Antarctica</div>
+        </li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Flexigrid</title>
+    <script src="jquery-1.6.js" type="text/javascript"></script>
+    <script src="phuong-plugin.js" type="text/javascript"></script>
+    <style type="text/css">
+        .a
+        {
+        }
+        .tooltip
+        {
+            display: none;
+            position: absolute;
+            border: 1px solid #333;
+            background-color: #ffed8a;
+            padding: 2px 6px;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('a').hover(function (e) {
+                var textTooltip = $(this).attr('title');
+                setTimeout(function () {
+                    $("<p class='tooltip'></p>").text(textTooltip).appendTo('body')
+                                .css('top', e.pageY + 'px')
+                                .css('left', e.pageX + 'px')
+                                .fadeIn('slow')
+                                ;
+                }, 55);
+            },
+        function () {
+            $('.tooltip').remove();
+        }).mousemove(function (e) {
+            $('.tooltip')
+ .css('top', (e.pageY - 10) + 'px')
+ .css('left', (e.pageX + 20) + 'px');
+
+        });
+
+            $('#myselect option').each(function () {
+                $(this).text($(this).text() + 'xx');
+            });
+
+            $('#show_toggle').toggle(function () { $('#mytoggle').css({ 'background-color': 'yellow' }); }, function () { $('#mytoggle').css({ 'background-color': 'red' }); });
+            $('#my_puff').click(function () {
+                $('#mytoggle').hide("puff");
+            });
+
+            $('<span>Adding</span>').addClass('adding').insertAfter('.wishlist');
+            $('.wishlist').click(function (e) {
+                doOneUp(this, function () {
+                    $(this).text('Added');
+                });
+                e.preventDefault();
+
+            })
+
+            function doOneUp(which, callback) {
+                $(which).next().show().animate({ top: "-=50px", opacity: "toggle" }, 1000, function () { $(this).css({ top: "" }).hide(callback).remove(); });
+
+            }
+
+            $("#highlight").click(function () {
+                $("#text1").hide()
+                .highlight({ color: 'green' })
+                .slideDown();
+            })
+        });
+
+    </script>
+    <style type="text/css">
+        #x44445454x span.c
+        {
+        }
+        #x44445454x.s span.c
+        {
+            color: Aqua;
+            background-color: Red;
+        }
+        .adding
+        {
+            position: relative;
+            left: -35px;
+            top: -4px;
+            display: none;
+        }
+        textarea
+        {
+            background-color: Blue;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-left: 100px; margin-top: 100px;">
+        <a href="a.html" title="tooltip">testing </a>
+    </div>
+    <div style="margin-left: 100px; margin-top: 100px;">
+        <a href="a.html" title="tooltip">testing kakaka </a>
+    </div>
+    <select id="myselect">
+        <option>a </option>
+        <option>b </option>
+        <option>c </option>
+    </select>
+    <div id="log">
+    </div>
+    <button id="show_toggle">
+        Show toggle</button>
+    <button id="my_puff">
+        puff
+    </button>
+    <div id="mytoggle" style="height: 200px; width: 200px; border: solid 2px yellow;
+        padding: 30px;">
+        Nguyen Thanh Phuong
+    </div>
+    <ul>
+        <li id="x44445454x" class="s"><a href="#"><span class="c">con me no</span></a> </li>
+    </ul>
+    <textarea id="text1">Nguyen thanh phuong</textarea>
+    <a class="wishlist" href="#">Add to wishlist</a> <a href="#" id="hightlight">hightlight</a>
+    <!--<script>        $(document).bind('mousemove', function (e) {
+            $("#log").text("e.pageX: " + e.pageX + ", e.pageY: " + e.pageY);
+        }); </script>-->
+</body>
+</html>

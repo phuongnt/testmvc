@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jquery-1.5.2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#Button_addFile').click(function () {
+                var countFile = $('#files div').length + 1;
+                $('#files').append("<div><input type='file' name='file" + countFile + "'></div>");
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id="files">
+        <div>
+            <input type="file" name="file1" />
+        </div>
+        <div>
+            <input type="file" name="file2" />
+        </div>
+        <div>
+            <input type="file" name="file3" />
+        </div>
+    </div>
+    <div id="Button_addFile">
+        Thêm File</div>
+</body>
+</html>

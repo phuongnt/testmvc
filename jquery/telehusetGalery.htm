@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jquery-1.6.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var itemIndex = 0,
+
+                itemCount = $('#DnCarouselItemCount').val(),
+
+                defaultFadeSpeed = 2500,
+
+                clickedFadeSpeed = 500,
+
+                keepLooping = true,
+
+                clicked = false;
+
+            // Call goToNext() every 8 seconds (every 8000 milliseconds)
+
+            window.setInterval(goToNext, 8000);
+
+            $('#campaignNext').click(function () {
+
+                keepLooping = false;
+
+                clicked = true;
+
+                goToNext(true);
+
+            });
+
+            $('#campaignPrevious').click(function () {
+
+                keepLooping = false;
+
+                clicked = true;
+
+                goToPrevious(true);
+
+            });
+
+            function goToNext() {
+
+                // Skip if user has previously clicked an arrow (keepLooping will be false) and this is timer calling function
+
+                if (keepLooping == false && clicked == false)
+
+                    return;
+
+                var fadeSpeed = clicked ? clickedFadeSpeed : defaultFadeSpeed;
+
+                // Reset "clicked" variable
+
+                clicked = false;
+
+                // Hide current element, increase itemIndex.
+
+                $('.campaign-' + itemIndex++).fadeOut(fadeSpeed);
+
+                // If we go beyond end of array, go to the first element
+
+                if (itemIndex >= itemCount)
+
+                    itemIndex = 0;
+
+                // Show next element
+
+                $('.campaign-' + itemIndex).fadeIn(fadeSpeed);
+
+            }
+
+            function goToPrevious() {
+
+                var fadeSpeed = clicked ? clickedFadeSpeed : defaultFadeSpeed;
+
+                // Reset "clicked" variable
+
+                clicked = false;
+
+                // Hide current element, decrease itemIndex.
+
+                $('.campaign-' + itemIndex--).fadeOut(fadeSpeed);
+
+                // If we go beyond start of array, go to the last element
+
+                if (itemIndex < 0)
+
+                    itemIndex = itemCount - 1;
+
+                // Show previous element
+
+                $('.campaign-' + itemIndex).fadeIn(fadeSpeed);
+
+            }
+
+        });
+
+    </script>
+    <style type="text/css">
+        #DnCarousel div.nav
+        {
+            width: 1096px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 3;
+        }
+
+        #DnCarousel section.content
+        {
+            color: #656565;
+            width: 100%;
+            padding: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #f2f2f2;
+            position: absolute;
+        }
+
+        #DnCarousel section.content h2
+        {
+            background-color: #000;
+            color: #fff;
+            display: inline-block;
+        }
+
+        #DnCarousel section.content h2.campaignHeading1
+        {
+            font-family: TelenorRegular;
+            font-size: 2.6em;
+            padding: .2em .6em .2em .5em;
+        }
+
+        #DnCarousel section.content h2.campaignHeading2
+        {
+            font-family: TelenorRegular;
+            font-size: 2.3em;
+            padding: .1em .2em;
+        }
+
+        #DnCarousel section.content p
+        {
+            font-size: .9em;
+            line-height: 1.3em;
+        }
+
+        #DnCarousel section.content div.mainBody
+        {
+            margin: 0 auto;
+            width: 1096px;
+        }
+
+        .campaignContainer
+        {
+            margin: 0 auto;
+        }
+
+        .campaignContainer section
+        {
+            display: none;
+        }
+
+        .campaignContainer section:first-child
+        {
+            display: block;
+        }
+
+        div#campaignPrevious, div#campaignNext
+        {
+            height: 73px;
+            width: 73px;
+            position: absolute;
+            top: 229px;
+        }
+        div#campaignPrevious
+        {
+            left: 0px;
+            background: url(images/campaignLeftArrow.png);
+        }
+
+        div#campaignNext
+        {
+            right: 0px;
+            background: url(images/campaignRightArrow.png);
+        }
+
+        div#campaignPrevious:hover
+        {
+            background: url(images/campaignLeftArrow_hover.png);
+            cursor: pointer;
+        }
+        div#campaignNext:hover
+        {
+            background: url(images/campaignRightArrow_hover.png);
+            cursor: pointer;
+        }
+
+        /* END CAMPAIGN CAROUSEL */
+
+        #DnCarousel section.content
+        {
+            height: 520px; /* If this is changed, also change margin-top of #campaignBlock */
+        }
+        #campaignBlock, .contentWrapper.DnCarousel
+        {
+            margin-top: 520px; /* If this is changed, also change height of #DnCarousel section.content */
+        }
+
+        /* START CAMPAIGN BLOCKS */
+
+        #campaignBlock .content
+        {
+            clear: both;
+        }
+
+        #campaignBlock .content div.item
+        {
+            float: left;
+            margin-right: 10px;
+        }
+
+        #campaignBlock .content div.item
+        {
+            margin-right: 0;
+        }
+        #campaignBlock .content img
+        {
+            float: left;
+            margin-right: 10px;
+        }
+
+        #campaignBlock .content div.item > div
+        {
+            float: left;
+            margin-right: 20px;
+            width: 150px;
+        }
+
+        #campaignBlock .content div.item.last > div
+        {
+            width: 200px;
+        }
+
+        #campaignBlock .content h2
+        {
+            background-color: #000;
+            color: #fff;
+            display: inline-block;
+            font-family: TelenorRegular;
+            font-size: 1.4em;
+            padding: .2em .4em;
+            margin-bottom: 16px;
+        }
+
+        #campaignBlock .content p
+        {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* END CAMPAIGN BLOCKS */
+    </style>
+</head>
+<body>
+    <!--    <div class="contentWrapper" id="DnCarousel">
+        <div class="nav">
+            <div id="campaignPrevious">
+            </div>
+            <div id="campaignNext">
+            </div>
+        </div>
+        <div class="campaignContainer">
+            <section class="content pane campaign-0" style="background-image: url('images/telehuset_01.png');
+                display: none;">
+
+                <div class="mainBody">
+
+                    <div>
+	<h2 class="campaignHeading1" style="margin: 350px 0 0 490px;">Noen som bryr seg om<br>bedriften min. Den følelsen.</h2>
+</div>
+
+                </div>
+
+            </section>
+            <section class="content pane campaign-1" style="background-image: url('images/campaign2Background.png');
+                display: block;">
+
+                <div class="mainBody">
+
+                    <div>
+	<div style="margin-top: 180px; margin-left: 480px;">
+<h2 class="campaignHeading2">Ny og ferdig oppsatt telefon.<br>Den følelsen.</h2>
+<p style="width: 400px; margin-top: 10px;">Mobilen er synkronisert og
+kontaktene fra gammel mobil er overført til den nye. Innboks og kalender
+ er oppdatert og sikker tilgang til bedriftsserveren er i boks. Du
+merker det når rådgiveren fra Telehuset har vært innom!</p>
+<p style="margin-top: 30px;"><a class="button" href="http://www.telehuset.no/Bedriftssentre/">Finn ditt lokale bedriftssenter</a></p>
+</div>
+</div>
+
+                </div>
+
+            </section>
+            <section class="content pane campaign-2" style="background-image: url('images/campaign3Background.png');
+                display: none;">
+
+                <div class="mainBody">
+
+                    <div>
+	<div style="margin-top: 180px; margin-left: 510px;">
+<h2 class="campaignHeading2">Tilgang til serveren <br>fra fortauet. Den følelsen.</h2>
+<p style="width: 400px; margin-top: 30px;">Telenor bedriftskunder har suveren dekning, døgnåpen<br>kundeservice, kostnadsfrie samtaler til kollegene og Norges beste mobile bredbånd.</p>
+</div>
+</div>
+
+                </div>
+
+            </section>
+        </div>
+        <input value="3" id="DnCarouselItemCount" type="hidden">
+    </div>
+-->
+    <div>
+        <label>
+            Con me may jon bo</label>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <script src="js/jquery-1.6.js" type="text/javascript"></script>
+    <script src="js/jQuery.jPlayer.2.0.0/jquery.jplayer.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jquery_jplayer_1").jPlayer({
+                ready: function () {
+                    $(this).jPlayer("setMedia", {
+                        m4a: "duoibongcay.mp4"
+                    });
+                },
+                swfPath: "/js",
+                supplied: "m4a"
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--<video src="duoibongcay.mp4" controls="controls">
+your browser does not support the video tag
+</video>
+-->
+    <div style="margin-left: 100px;">
+        <canvas id="myCanvas" width="200" height="100" style="border: 1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+    </div>
+    <script type="text/javascript">
+        var c = document.getElementById("myCanvas");
+        var cxt = c.getContext("2d");
+        cxt.moveTo(10, 10);
+        cxt.lineTo(150, 50);
+        cxt.lineTo(10, 50);
+        cxt.stroke();
+    </script>
+    <div id="jquery_jplayer_1">
+    </div>
+    <div id="jp_interface_1">
+        <a href="#" class="jp-play">Play</a> <a href="#" class="jp-pause">Pause</a>
+    </div>
+</body>
+</html>

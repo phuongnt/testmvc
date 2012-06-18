@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jquery-1.5.2.js" type="text/javascript"></script>
+    <script src="easydrapdrop.js" type="text/javascript"></script>
+    <script src="jquery-ui-1.8.11.js" type="text/javascript"></script>
+    <link href="themes/ui-lightness/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="themes/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $().ready(function () {
+            $('#phuong2').append("<div>cde</div>");
+            $('a.demo').click(function () {
+                alert(this.href);
+                return this.each(function () {
+                    alert(this.id);
+                });
+            });
+            var twitter = {
+                userName: "phuong",
+                tweet: function () {
+                    alert("hello " + this.userName);
+                }, troioi: function () {
+                    alert("j zay troi  " + this.userName);
+                }
+            };
+            $('#update1').click(twitter.tweet);
+            $('#update2').click(twitter.troioi);
+            $('#update3').click($.proxy(twitter.tweet, twitter));
+
+            $('#2a').click(function () {
+                var temp2a = $(this);
+                tem2a.fadeOut();
+            });
+            $(".testSiblings").siblings().css({ 'color': 'red' });
+            $(".con>p:contains(con)").css({ 'color': 'blue' });
+            $('p:hidden').css({ 'display': 'inherit', 'color': 'yellow' });
+            //            $("a[@id]").css({ 'text-decoration': 'none' });
+            $('<p>My <em>new</em> paragraph</p>').prependTo('body');
+            $('<a href=""></a>').append('test hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh2').prependTo('body');
+
+            //            var message = 'Spoon!';
+            //            $('#b1').bind('click', function () {
+            //                alert(message);
+            //            });
+            //            message = 'Not in the face!';
+            //            $('#b2').bind('click', function () {
+            //                alert(message);
+            //            });
+
+            $('.selector_1').css({ 'background-color': 'red' });
+
+            function aniDiv() {
+                $(".selector_1").animate({ width: "20%" }, "slow");
+                $(".selector_1").animate({ width: "100%" }, "slow", aniDiv);
+            }
+            //aniDiv();
+
+            var message = 'Spoon!';
+            $('#b1').click({ msg: message }, function (event) {
+                alert(event.data.msg);
+            });
+
+            message = 'Not in the face!';
+            $('#b2').click(function () {
+                $('div').blur();
+                $('.selector_1').wrap('<div style="background-color:Black;">fffffffffff</div>');
+                //$('.selector_1').clone().insertAfter('.selector_1');
+
+            });
+
+            $('#b3').click(function () {
+
+                $('.selector_1').css({ 'background-color': 'blue' });
+                $(".selector_1").easydrag();
+                $(".selector_1").addClass("abc");
+                $(".selector_1").setHandler('handler3');
+
+            });
+            $('#b3').click(function () {
+
+                $('#confirmDialog').dialog('option', 'href', this.href).dialog('open');
+
+            });
+        });
+
+        //        $(document).ready(function () {
+        //            function aniDiv() {
+        //                $("div").animate({ width: "20%" }, "slow");
+        //                $("div").animate({ width: "100%" }, "slow", aniDiv);
+        //            }
+        //            aniDiv();
+        //            $(".btn1").click(function () {
+        //                $(":animated").css("background-color", "red");
+        //            });
+        //        });
+
+    </script>
+    <style type="text/css">
+        .abc
+        {
+            text-decoration: none;
+            background-color: Black;
+            border: solid 2px #e5e5e5;
+            width: 500px;
+            color: White;
+        }
+    </style>
+</head>
+<body>
+    <a id="googlelink" class="demo" href="http://www.google.com">google</a> <a id="Microsoftlink"
+        class="demo" href="http://www.google.com">Microsoft</a>
+    <div>
+        <input id="update1" name="update1" type="button" value="update1" />
+        <input id="update2" name="update2" type="button" value="update2" />
+        <input id="update3" name="update3" type="button" value="update3" />
+        <input id="2a" value="2a" type="button" />
+    </div>
+    <div class="cha">
+        <div class="con">
+            <a href="abc" id="dddd">fffffffffffff</a>
+            <p>
+                con 0
+            </p>
+            <p>
+                con 0 0 0
+                <div>
+                    ddd</div>
+            </p>
+            <p>
+                con 0 1
+            </p>
+            <p>
+                con 0 2
+            </p>
+            <p style="display: none;">
+                troi oi
+            </p>
+        </div>
+        <div class="con1">
+            con 1
+        </div>
+    </div>
+    <div id='confirmDialog' title='Confirm'>
+        <p>
+            <span class='ui-icon ui-icon-alert' style='float: left; margin: 0 7px 20px 0;'></span>
+            Are you sure you want to abandon your changes?
+        </p>
+    </div>
+    <div class="selector_1">
+        <p class="testSiblings">
+            Performs a custom animation (of a set of CSS properties) for selected elements
+        </p>
+        <p>
+            b
+        </p>
+        <p>
+            Performs a custom animation (of a set of CSS properties) for selected elements
+        </p>
+        <p>
+            d
+        </p>
+        <p>
+            Performs a custom animation (of a set of CSS properties) for selected elements
+        </p>
+    </div>
+    <div>
+        <div class="testanimate" style="background: blue;">
+            Div 1</div>
+        <p>
+            passing event data</p>
+        <input id="b1" name="b1" type="button" value="b1" />
+        <input id="b2" name="b2" type="button" value="b2" />
+        <input id="b3" name="b3" type="button" value="b3" />
+        <input id="b4" name="b4" type="button" value="show button" />
+    </div>
+    <div id="phuong2">
+        <div>
+            abc</div>
+    </div>
+</body>
+</html>

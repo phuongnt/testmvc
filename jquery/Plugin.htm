@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Flexigrid</title>
+    <script src="jquery-1.6.js" type="text/javascript"></script>
+    <script src="phuong-plugin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#highlight").click(function () {
+                $("#text1").hide()
+                .highlight({}).slideDown();
+
+            })
+            if ($.trim($("#conmeno").html()) == '' && $.trim($("#conmeno").text()) == '') {
+                alert("xx");
+            }
+        });
+
+    </script>
+    <style type="text/css">
+        textarea
+        {
+            background-color: Blue;
+        }
+        div
+        {
+            background-color: Red;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <a href="#" id="highlight">hightlight</a>
+    </div>
+    <textarea id="text1">Nguyen thanh phuong</textarea>
+    <div id="conmeno">
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    (function ($) {
+        $.fn.keke = function () {
+            return this.each(function () {
+                $(this).css({ 'color': 'yellow' });
+            });
+        }
+    })(jQuery);
+</script>

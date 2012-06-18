@@ -66,7 +66,7 @@ namespace Utility2
             sUrl = txtUrl.Text;
             sPost = "";
             CookieCollection Cookie = new CookieCollection();
-            Cookie.
+          
             var sContent = httpDownload.PostMethodDownload(sUrl, sPost, false, false, false, false);
 
             txtContent.Text = sContent;
