@@ -1,0 +1,12 @@
+E:\MVC4\PsdParser\Psd\obj\Debug\Psd.Form1.resources
+E:\MVC4\PsdParser\Psd\obj\Debug\Psd.Properties.Resources.resources
+E:\MVC4\PsdParser\Psd\obj\Debug\Psd.csproj.GenerateResource.Cache
+E:\MVC4\PsdParser\Psd\bin\Debug\FourCC.txt
+E:\MVC4\PsdParser\Psd\bin\Debug\Psd.exe
+E:\MVC4\PsdParser\Psd\bin\Debug\Psd.pdb
+E:\MVC4\PsdParser\Psd\bin\Debug\Endogine.Codecs.Photoshop.dll
+E:\MVC4\PsdParser\Psd\bin\Debug\Endogine.dll
+E:\MVC4\PsdParser\Psd\bin\Debug\Endogine.Codecs.Photoshop.pdb
+E:\MVC4\PsdParser\Psd\obj\Debug\Psd.csprojResolveAssemblyReference.cache
+E:\MVC4\PsdParser\Psd\obj\Debug\Psd.exe
+E:\MVC4\PsdParser\Psd\obj\Debug\Psd.pdb

@@ -40,6 +40,7 @@
             this.txtURLPost = new System.Windows.Forms.TextBox();
             this.lbCount = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btGenerate
@@ -147,11 +148,23 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button5.Location = new System.Drawing.Point(570, 216);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "load PSD";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 620);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.lbCount);
             this.Controls.Add(this.txtURLPost);
@@ -164,6 +177,7 @@
             this.Controls.Add(this.btGenerate);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,6 +196,7 @@
         private System.Windows.Forms.TextBox txtURLPost;
         private System.Windows.Forms.Label lbCount;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
     }
 }
 

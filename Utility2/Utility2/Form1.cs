@@ -119,5 +119,17 @@ namespace Utility2
            
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            PhotoshopFile.PsdFile pfile = new PhotoshopFile.PsdFile();
+            pfile.Load("D:/1.psd");
+            var a = 3;
+        }
+
     }
 }

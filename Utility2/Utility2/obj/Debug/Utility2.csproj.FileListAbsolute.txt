@@ -12,3 +12,7 @@ E:\mvc4\Utility2\Utility2\obj\Debug\Utility2.Form1.resources
 E:\mvc4\Utility2\Utility2\obj\Debug\Utility2.Properties.Resources.resources
 E:\mvc4\Utility2\Utility2\obj\Debug\Utility2.csproj.GenerateResource.Cache
 E:\mvc4\Utility2\Utility2\obj\Debug\Utility2.exe
+E:\MVC4\Utility2\Utility2\bin\Debug\Utility2.exe.config
+E:\MVC4\Utility2\Utility2\bin\Debug\Utility2.exe
+E:\MVC4\Utility2\Utility2\bin\Debug\Utility2.pdb
+E:\MVC4\Utility2\Utility2\obj\Debug\Utility2.pdb

@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="jquery-1.6.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.marker').hover(function () {
+                var marker = $(this).text();
+                $('.markerInfo').hide();
+                $('#markerInfo' + marker).show();
+            }, function () {              
+               // $('.markerInfo').hide();               
+            });
+            $('.bMarker').hover(function () {
+                var marker = $(this).children('td:first').text();
+                $('.markerInfo').hide();
+                $('#markerInfo' + marker).show();
+            }, function () {
+               // $('.markerInfo').hide();
+            });
+        });
+
+
+
+
+    </script>
+    <style type="text/css">
+        #rainmap
+        {
+            background-image: url('images/1.png');
+            width: 450px;
+            height: 312px;
+            position: relative;
+        }
+
+        .marker
+        {
+            width: 10px;
+            height: 10px;
+            background: #CD242B;
+            position: absolute;
+            font-size: 8px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .mapLeft
+        {
+            float: left;
+            background-color: #ffffff;
+        }
+
+        .mapRight
+        {
+            padding: 10px;
+            float: left;
+            width: 200px;
+            background-color: #CFCDB4;
+        }
+
+        .markerInfo
+        {
+            display: none;
+        }
+
+        .listMarker
+        {
+            margin-top: 40px;
+        }
+
+        .listMarkerA
+        {
+            float: left;
+            color: #ec008c;
+            width: 220px;
+        }
+
+        .listMarkerB
+        {
+            float: right;
+            color: #00aeef;
+            width: 220px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mapLeft">
+        <div id="rainmap">
+            <div class="marker" id="marker1" style="top: 100px; left: 100px;">1</div>
+            <div class="marker" id="marker2" style="top: 10px; left: 100px;">2</div>
+            <div class="marker" id="marker3" style="top: 100px; left: 10px;">3</div>
+        </div>
+        <div class="listMarker">
+            <div class="listMarkerA">
+                <div>Bikubegang</div>
+                <table>
+                    <tr class="bMarker" id="bMarker1">
+                        <td>1</td>
+                        <td>MURBOLIGEN</td>
+                    </tr>
+                    <tr class="bMarker" id="bMarker2">
+                        <td>2</td>
+                        <td>MURBOLIGEN</td>
+                    </tr>
+                    <tr class="bMarker" id="bMarker3">
+                        <td>3</td>
+                        <td>MURBOLIGEN</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="listMarkerB">
+                <div>Litteratursymposiet 2012</div>
+                <table>
+                    <tr>
+                        <td>1</td>
+                        <td>MURBOLIGEN</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>MURBOLIGEN</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>MURBOLIGEN</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="mapRight">
+        <div class="markerInfo" id="markerInfo1">
+            <div style="background-color: #00aeef; width: 15px; text-align: center;">A</div>
+            <div class="MarkerTitle">
+                Lindehuset
+            </div>
+            <div class="markerImage">
+                <img src="../images/2.jpg" />
+            </div>
+            <div class="markerContent">
+                mouseevent: on markers- and list-items (below the map) Rollover --> show information
+                (a picture, some text and a weblink) in the right pane
+            </div>
+        </div>
+        <div class="markerInfo" id="markerInfo2">
+            <div style="background-color: #00aeef; width: 15px; text-align: center;">A</div>
+            <div class="MarkerTitle">
+                Lindehuset22
+            </div>
+            <div class="markerImage">
+                <img src="../images/2.jpg" />
+            </div>
+            <div class="markerContent">
+                mouseevent: on markers- and list-items (below the map) Rollover --> show information
+                (a picture, some text and a weblink) in the right pane
+            </div>
+        </div>
+        <div class="markerInfo" id="markerInfo3">
+            <div style="background-color: #00aeef; width: 15px; text-align: center;">A</div>
+            <div class="MarkerTitle">
+                Lindehuset 333
+            </div>
+            <div class="markerImage">
+                <img src="../images/2.jpg" />
+            </div>
+            <div class="markerContent">
+                mouseevent: on markers- and list-items (below the map) Rollover --> show information
+                (a picture, some text and a weblink) in the right pane
+            </div>
+        </div>
+        <div>
+            <a href="#" class="b">
+                <img src="images/billetter.jpg" /></a><a href="#" class="b">
+                    <img src="images/fb.jpg" /></a>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+</body>
+</html>
