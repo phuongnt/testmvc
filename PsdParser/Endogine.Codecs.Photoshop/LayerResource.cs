@@ -212,7 +212,7 @@ namespace Endogine.Codecs.Photoshop
             string tag = new string(reader.ReadPSDChars(4));
             Type type = null;
             bool usingDefault = false;
-            if (!ResourceTypes.ContainsKey(tag))
+            if (ResourceTypes == null || !ResourceTypes.ContainsKey(tag))
             {
                 if (inheritsType == null)
                     inheritsType = typeof(LayerResource);
@@ -227,9 +227,15 @@ namespace Endogine.Codecs.Photoshop
                 type = ResourceTypes[tag];
 
             System.Reflection.ConstructorInfo ci = type.GetConstructor(new Type[] { typeof(BinaryPSDReader) });
-            LayerResource res = (LayerResource)ci.Invoke(new object[] { reader });
+            LayerResource res = null;
+            try
+            {
+                res = (LayerResource)ci.Invoke(new object[] { reader });
+                res.Tag = tag;
+            }
+            catch { }
 
-            res.Tag = tag;
+          
 
             return res;
         }

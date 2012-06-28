@@ -17,7 +17,7 @@ namespace Psd
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Endogine.Codecs.Photoshop.Document psd = new Endogine.Codecs.Photoshop.Document("D:/2.psd");
+            Endogine.Codecs.Photoshop.Document psd = new Endogine.Codecs.Photoshop.Document("D:/1.psd");
             int a = 0;
             foreach (var item in psd.Layers)
             {
