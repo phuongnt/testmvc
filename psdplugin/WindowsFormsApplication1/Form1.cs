@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             PhotoshopFile.PsdFile pfile = new PhotoshopFile.PsdFile();
-            pfile.Load("22.psd");
+            pfile.Load("11.psd");
             //Rectangle rect = new Rectangle(0,0,300,300);
             //pfile.Layers[0].Channels[0].DecompressImageData(pfile.Layers[0].Rect);
            
@@ -116,7 +116,7 @@ namespace WindowsFormsApplication1
                                     }
                                 }
                                 if (mask != 0) {
-                                    alpha = 1;
+                                    alpha = mask;
                                 }
                                 bitmap.SetPixel(x, y, Color.FromArgb(alpha, red, green, blue));
                                 //if (layer.Channels.Count == 3)
@@ -177,9 +177,18 @@ namespace WindowsFormsApplication1
 
                     }
                 if (isAlpha)
+                {
+                    for (int i = 0; i < 700; i++)
+                    {
+                        for (int j = 0; j < 100; j++)
+                        {
+                            bitmap.SetPixel(i,j,Color.FromArgb(1));
+                        }
+                    }
                     bitmap.Save(path + "png", System.Drawing.Imaging.ImageFormat.Png);
+                }
                 else
-                    bitmap.Save(path+ "jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                    bitmap.Save(path + "jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                     
             }
         }
