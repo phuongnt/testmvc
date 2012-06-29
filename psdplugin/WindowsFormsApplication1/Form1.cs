@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             PhotoshopFile.PsdFile pfile = new PhotoshopFile.PsdFile();
-            pfile.Load("D:/1.psd");
+            pfile.Load("D:/11.psd");
             //Rectangle rect = new Rectangle(0,0,300,300);
             //pfile.Layers[0].Channels[0].DecompressImageData(pfile.Layers[0].Rect);
            
@@ -31,7 +31,12 @@ namespace WindowsFormsApplication1
             {
                 int width0 = pfile.Layers[i].Rect.Width;
                 int height0 = pfile.Layers[i].Rect.Height;
-                test2(pfile.Layers[i], "D://ps//conkhi" + i.ToString() + ".png",pfile.ColorMode);
+                if (i == 2)
+                {
+                    int a = 3;
+                }
+                    test2(pfile.Layers[i], "D://ps//conkhi" + i.ToString() + ".", pfile.ColorMode);
+               
 
             }
 
@@ -72,26 +77,60 @@ namespace WindowsFormsApplication1
                 for (int y = 0; y < height; y++)
                     for (int x = 0; x < width; x++)
                     {
-                        int red, green, blue, alpha;
+                        int red=0, green=0, blue=0, alpha=0,mask=0;
                         switch (ColorMode)
                         { 
                             case PhotoshopFile.PsdColorMode.RGB:
-                                if (layer.Channels.Count == 3)
+                                for (int i = 0; i < layer.Channels.Count; i++)
                                 {
-                                    red = layer.Channels[0].ImageData[(width * y) + x]; // read from array
-                                    green = layer.Channels[1].ImageData[(width * y) + x]; // read from array
-                                    blue = layer.Channels[2].ImageData[(width * y) + x]; // read from array
-                                    alpha = 0;
-                                    bitmap.SetPixel(x, y, Color.FromArgb(alpha, red, green, blue));
+                                    int position = (width * y) + x;
+                                    if (layer.Channels[i].ID == -2)
+                                    {
+                                        
+                                        int widthMask = layer.MaskData.Rect.Width;
+                                        int heightMask = layer.MaskData.Rect.Height;
+                                        int XMask = layer.MaskData.Rect.X;
+                                        int YMask = layer.MaskData.Rect.Y;
+                                        if(position>((YMask*width)+ XMask) && position<(YMask*width)+XMask+ widthMask)
+                                        {
+                                            //get mask data
+                                        }
+                                        mask = layer.Channels[i].ImageData[position];
+                                    }
+                                    if (layer.Channels[i].ID == -1)
+                                    {
+                                        alpha = layer.Channels[i].ImageData[position];
+                                    }
+                                    if (layer.Channels[i].ID == 0)
+                                    {
+                                        red = layer.Channels[i].ImageData[position];
+                                    }
+                                    if (layer.Channels[i].ID == 1)
+                                    {
+                                        green = layer.Channels[i].ImageData[position];
+                                    }
+                                    if (layer.Channels[i].ID == 2)
+                                    {
+                                        blue = layer.Channels[i].ImageData[position];
+                                    }
                                 }
-                                else if (layer.Channels.Count == 4)
-                                {
-                                    alpha = layer.Channels[0].ImageData[(width * y) + x]; // read from array
-                                    red = layer.Channels[1].ImageData[(width * y) + x]; // read from array
-                                    green = layer.Channels[2].ImageData[(width * y) + x]; // read from array
-                                    blue = layer.Channels[3].ImageData[(width * y) + x]; // read from array
-                                    bitmap.SetPixel(x, y, Color.FromArgb(alpha, red, green, blue));
-                                }
+                                bitmap.SetPixel(x, y, Color.FromArgb(1, red, green, blue));
+                                //if (layer.Channels.Count == 3)
+                                //{
+                                //    red = layer.Channels[0].ImageData[(width * y) + x]; // read from array
+                                //    green = layer.Channels[1].ImageData[(width * y) + x]; // read from array
+                                //    blue = layer.Channels[2].ImageData[(width * y) + x]; // read from array
+                                //    alpha = 0;
+                                //    bitmap.SetPixel(x, y, Color.FromArgb(alpha, red, green, blue));
+                                //}
+                                //else if (layer.Channels.Count == 4)
+                                //{
+                                //    alpha = layer.Channels[0].ImageData[(width * y) + x]; // read from array
+                                //    red = layer.Channels[1].ImageData[(width * y) + x]; // read from array
+                                //    green = layer.Channels[2].ImageData[(width * y) + x]; // read from array
+                                //    blue = layer.Channels[3].ImageData[(width * y) + x]; // read from array
+                                //    bitmap.SetPixel(x, y, Color.FromArgb(alpha, red, green, blue));
+                                //}
                                 break;
                             case PhotoshopFile.PsdColorMode.CMYK:
                                 if (layer.Channels.Count == 4)
@@ -134,9 +173,9 @@ namespace WindowsFormsApplication1
 
                     }
                 if (isAlpha)
-                    bitmap.Save(path, System.Drawing.Imaging.ImageFormat.Png);
+                    bitmap.Save(path + "png", System.Drawing.Imaging.ImageFormat.Png);
                 else
-                    bitmap.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    bitmap.Save(path+ "jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                     
             }
         }
