@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             PhotoshopFile.PsdFile pfile = new PhotoshopFile.PsdFile();
-            pfile.Load("D:/11.psd");
+            pfile.Load("22.psd");
             //Rectangle rect = new Rectangle(0,0,300,300);
             //pfile.Layers[0].Channels[0].DecompressImageData(pfile.Layers[0].Rect);
            
@@ -94,8 +94,9 @@ namespace WindowsFormsApplication1
                                         if(position>((YMask*width)+ XMask) && position<(YMask*width)+XMask+ widthMask)
                                         {
                                             //get mask data
+                                            mask = layer.Channels[i].ImageData[position - ((YMask * width) + XMask)];
                                         }
-                                        mask = layer.Channels[i].ImageData[position];
+                                        
                                     }
                                     if (layer.Channels[i].ID == -1)
                                     {
@@ -114,7 +115,10 @@ namespace WindowsFormsApplication1
                                         blue = layer.Channels[i].ImageData[position];
                                     }
                                 }
-                                bitmap.SetPixel(x, y, Color.FromArgb(1, red, green, blue));
+                                if (mask != 0) {
+                                    alpha = 1;
+                                }
+                                bitmap.SetPixel(x, y, Color.FromArgb(alpha, red, green, blue));
                                 //if (layer.Channels.Count == 3)
                                 //{
                                 //    red = layer.Channels[0].ImageData[(width * y) + x]; // read from array
