@@ -35,7 +35,7 @@ namespace WindowsFormsApplication1
                 {
                     int a = 3;
                 }
-                    test2(pfile.Layers[i], "D://ps//conkhi" + i.ToString() + ".", pfile.ColorMode);
+                    test2(pfile.Layers[i], "D://a//conkhi" + i.ToString() + ".", pfile.ColorMode);
                
 
             }
@@ -77,7 +77,7 @@ namespace WindowsFormsApplication1
                 for (int y = 0; y < height; y++)
                     for (int x = 0; x < width; x++)
                     {
-                        int red=0, green=0, blue=0, alpha=0,mask=0;
+                        int red=0, green=0, blue=0, alpha=0,mask=-1;
                         switch (ColorMode)
                         { 
                             case PhotoshopFile.PsdColorMode.RGB:
@@ -89,13 +89,27 @@ namespace WindowsFormsApplication1
                                         
                                         int widthMask = layer.MaskData.Rect.Width;
                                         int heightMask = layer.MaskData.Rect.Height;
-                                        int XMask = layer.MaskData.Rect.X;
-                                        int YMask = layer.MaskData.Rect.Y;
-                                        if(position>((YMask*width)+ XMask) && position<(YMask*width)+XMask+ widthMask)
+                                        int XMask = layer.MaskData.Rect.X-layer.Rect.X;
+                                        int YMask = layer.MaskData.Rect.Y-layer.Rect.Y;
+                                        //y>ymask && y< ymask+ heightMask
+                                        //x> xmask && x< xmask + widthMask
+
+                                        if (x > XMask && x < XMask + widthMask && y > YMask && y < YMask + heightMask)
                                         {
-                                            //get mask data
-                                            mask = layer.Channels[i].ImageData[position - ((YMask * width) + XMask)];
+                                            mask = layer.Channels[i].ImageData[(widthMask * (y-YMask)) + x-XMask];
+                                            if (mask == 0)
+                                            {
+                                                int a = 3;
+
+                                            }
                                         }
+
+
+                                        //if (position > (((YMask - layer.Rect.Y) * width) + XMask - layer.Rect.X) && position < ((YMask + heightMask-2 - layer.Rect.Y) * width) + XMask + widthMask-layer.Rect.X)
+                                        //{
+                                        //    //get mask data
+                                        //    mask = layer.Channels[i].ImageData[position - (((YMask -layer.Rect.Y)* width) + XMask-layer.Rect.X)-1];
+                                        //}
                                         
                                     }
                                     if (layer.Channels[i].ID == -1)
@@ -115,7 +129,11 @@ namespace WindowsFormsApplication1
                                         blue = layer.Channels[i].ImageData[position];
                                     }
                                 }
-                                if (mask != 0) {
+                                if (mask != -1) {
+                                    isAlpha = true;
+                                    //red = mask;
+                                    //green = mask;
+                                    //blue = mask;
                                     alpha = mask;
                                 }
                                 bitmap.SetPixel(x, y, Color.FromArgb(alpha, red, green, blue));
@@ -178,13 +196,13 @@ namespace WindowsFormsApplication1
                     }
                 if (isAlpha)
                 {
-                    for (int i = 0; i < 700; i++)
-                    {
-                        for (int j = 0; j < 100; j++)
-                        {
-                            bitmap.SetPixel(i,j,Color.FromArgb(1));
-                        }
-                    }
+                    //for (int i = 0; i < 700; i++)
+                    //{
+                    //    for (int j = 0; j < 100; j++)
+                    //    {
+                    //        bitmap.SetPixel(i,j,Color.FromArgb(1));
+                    //    }
+                    //}
                     bitmap.Save(path + "png", System.Drawing.Imaging.ImageFormat.Png);
                 }
                 else
