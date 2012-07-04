@@ -72,32 +72,32 @@ namespace PhotoshopFile
       DecompressImages();
     }
 
-    public void Save(string fileName)
-    {
-      using (FileStream stream = new FileStream(fileName, FileMode.Create))
-      {
-        Save(stream);
+    //public void Save(string fileName)
+    //{
+    //  using (FileStream stream = new FileStream(fileName, FileMode.Create))
+    //  {
+    //    Save(stream);
 
-      }
-    }
+    //  }
+    //}
 
-    public void Save(Stream stream)
-    {
-      if (Depth != 8)
-        throw new NotImplementedException("Only 8-bit color has been implemented for saving.");
+    //public void Save(Stream stream)
+    //{
+    //  if (Depth != 8)
+    //    throw new NotImplementedException("Only 8-bit color has been implemented for saving.");
 
-      PsdBinaryWriter writer = new PsdBinaryWriter(stream);
+    //  PsdBinaryWriter writer = new PsdBinaryWriter(stream);
 
-      writer.AutoFlush = true;
+    //  writer.AutoFlush = true;
 
-      PrepareSave();
+    //  PrepareSave();
 
-      SaveHeader(writer);
-      SaveColorModeData(writer);
-      SaveImageResources(writer);
-      SaveLayerAndMaskInfo(writer);
-      SaveImage(writer);
-    }
+    //  SaveHeader(writer);
+    //  SaveColorModeData(writer);
+    //  SaveImageResources(writer);
+    //  SaveLayerAndMaskInfo(writer);
+    //  SaveImage(writer);
+    //}
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -424,16 +424,16 @@ namespace PhotoshopFile
 
     ///////////////////////////////////////////////////////////////////////////
 
-    private void SaveLayerAndMaskInfo(PsdBinaryWriter writer)
-    {
-      Debug.WriteLine("SaveLayerAndMaskInfo started at " + writer.BaseStream.Position.ToString(CultureInfo.InvariantCulture));
+    //private void SaveLayerAndMaskInfo(PsdBinaryWriter writer)
+    //{
+    //  Debug.WriteLine("SaveLayerAndMaskInfo started at " + writer.BaseStream.Position.ToString(CultureInfo.InvariantCulture));
 
-      using (new PsdBlockLengthWriter(writer))
-      {
-        SaveLayers(writer);
-        SaveGlobalLayerMask(writer);
-      }
-    }
+    //  using (new PsdBlockLengthWriter(writer))
+    //  {
+    //    SaveLayers(writer);
+    //    SaveGlobalLayerMask(writer);
+    //  }
+    //}
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -500,49 +500,56 @@ namespace PhotoshopFile
     /// </summary>
     private void DecompressImages()
     {
-      PaintDotNet.Threading.PrivateThreadPool threadPool = new PaintDotNet.Threading.PrivateThreadPool();
+        //PaintDotNet.Threading.PrivateThreadPool threadPool = new PaintDotNet.Threading.PrivateThreadPool();
 
-      var imageLayers = m_layers.Concat(new List<Layer>() { this.BaseLayer });
-      foreach (Layer layer in imageLayers)
-      {
-        foreach (Layer.Channel channel in layer.Channels)
+        var imageLayers = m_layers.Concat(new List<Layer>() { this.BaseLayer });
+        foreach (Layer layer in imageLayers)
         {
-          Rectangle rect = (channel.ID == -2)
-            ? layer.MaskData.Rect
-            : layer.Rect;
+            foreach (Layer.Channel channel in layer.Channels)
+            {
+                Rectangle rect = (channel.ID == -2)
+                  ? layer.MaskData.Rect
+                  : layer.Rect;
 
-          DecompressChannelContext dcc = new DecompressChannelContext(channel, rect);
-
-          WaitCallback waitCallback = new WaitCallback(dcc.DecompressChannel);
-          threadPool.QueueUserWorkItem(waitCallback);
+                DecompressChannelContext dcc = new DecompressChannelContext(channel, rect);
+                dcc.DecompressChannel(dcc);
+                WaitCallback waitCallback = new WaitCallback(dcc.DecompressChannel);
+                //threadPool.QueueUserWorkItem(waitCallback);
+            }
         }
-      }
 
-      threadPool.Drain();
-
-      foreach (Layer layer in m_layers)
-      {
-        if (layer.Channels.ContainsId(-2))
-          layer.MaskData.ImageData = layer.Channels.GetId(-2).ImageData;
-      }
+        //threadPool.Drain();
+        //foreach (Layer layer in m_layers)
+        //{
+        //    foreach (var item in layer.Channels)
+        //    {
+        //        item.DecompressImageData(layer.Rect);
+        //    }
+                 
+        //}
+        foreach (Layer layer in m_layers)
+        {
+            if (layer.Channels.ContainsId(-2))
+                layer.MaskData.ImageData = layer.Channels.GetId(-2).ImageData;
+        }
     }
 
     /// <summary>
     /// Check the validity of the PSD file and generate necessary data.
     /// </summary>
-    public void PrepareSave()
-    {
+    //public void PrepareSave()
+    //{
 
-      PaintDotNet.Threading.PrivateThreadPool threadPool = new PaintDotNet.Threading.PrivateThreadPool();
-      var imageLayers = m_layers.Concat(new List<Layer>() { this.BaseLayer });
-      foreach (Layer layer in imageLayers)
-      {
-        layer.PrepareSave(threadPool);
-      }
-      threadPool.Drain();
+    //  PaintDotNet.Threading.PrivateThreadPool threadPool = new PaintDotNet.Threading.PrivateThreadPool();
+    //  var imageLayers = m_layers.Concat(new List<Layer>() { this.BaseLayer });
+    //  foreach (Layer layer in imageLayers)
+    //  {
+    //    layer.PrepareSave(threadPool);
+    //  }
+    //  threadPool.Drain();
 
-      SetVersionInfo();
-    }
+    //  SetVersionInfo();
+    //}
 
     /// <summary>
     /// Set the VersionInfo resource on the file.
@@ -573,35 +580,35 @@ namespace PhotoshopFile
       versionInfo.FileVersion = 1;
     }
 
-    private void SaveLayers(PsdBinaryWriter writer)
-    {
-      Debug.WriteLine("SaveLayers started at " + writer.BaseStream.Position.ToString(CultureInfo.InvariantCulture));
+    //private void SaveLayers(PsdBinaryWriter writer)
+    //{
+    //  Debug.WriteLine("SaveLayers started at " + writer.BaseStream.Position.ToString(CultureInfo.InvariantCulture));
 
-      using (new PsdBlockLengthWriter(writer))
-      {
-        short numberOfLayers = (short)m_layers.Count;
-        if (AbsoluteAlpha)
-          numberOfLayers = (short)-numberOfLayers;
+    //  using (new PsdBlockLengthWriter(writer))
+    //  {
+    //    short numberOfLayers = (short)m_layers.Count;
+    //    if (AbsoluteAlpha)
+    //      numberOfLayers = (short)-numberOfLayers;
 
-        writer.Write(numberOfLayers);
+    //    writer.Write(numberOfLayers);
 
-        foreach (Layer layer in m_layers)
-        {
-          layer.Save(writer);
-        }
+    //    foreach (Layer layer in m_layers)
+    //    {
+    //      layer.Save(writer);
+    //    }
 
-        foreach (Layer layer in m_layers)
-        {
-          foreach (Layer.Channel channel in layer.Channels)
-          {
-            channel.SavePixelData(writer);
-          }
-        }
+    //    foreach (Layer layer in m_layers)
+    //    {
+    //      foreach (Layer.Channel channel in layer.Channels)
+    //      {
+    //        channel.SavePixelData(writer);
+    //      }
+    //    }
 
-        if (writer.BaseStream.Position % 2 == 1)
-          writer.Write((byte)0);
-      }
-    }
+    //    if (writer.BaseStream.Position % 2 == 1)
+    //      writer.Write((byte)0);
+    //  }
+    //}
 
     ///////////////////////////////////////////////////////////////////////////
 

@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             PhotoshopFile.PsdFile pfile = new PhotoshopFile.PsdFile();
-            pfile.Load("1.psd");
+            pfile.Load("11.psd");
             //Rectangle rect = new Rectangle(0,0,300,300);
             //pfile.Layers[0].Channels[0].DecompressImageData(pfile.Layers[0].Rect);
            

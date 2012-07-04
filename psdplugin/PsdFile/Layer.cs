@@ -911,84 +911,84 @@ namespace PhotoshopFile
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public void PrepareSave(PaintDotNet.Threading.PrivateThreadPool threadPool)
-    {
-      foreach (Channel ch in m_channels)
-      {
-        CompressChannelContext ccc = new CompressChannelContext(ch);
-        WaitCallback waitCallback = new WaitCallback(ccc.CompressChannel);
-        threadPool.QueueUserWorkItem(waitCallback);
-      }
+    //public void PrepareSave(PaintDotNet.Threading.PrivateThreadPool threadPool)
+    //{
+    //  foreach (Channel ch in m_channels)
+    //  {
+    //    CompressChannelContext ccc = new CompressChannelContext(ch);
+    //    WaitCallback waitCallback = new WaitCallback(ccc.CompressChannel);
+    //    threadPool.QueueUserWorkItem(waitCallback);
+    //  }
 
-      // Create or update the Unicode layer name to be consistent with the
-      // ANSI layer name.
-      var layerUnicodeNames = AdditionalInfo.Where(x => x is LayerUnicodeName);
-      if (layerUnicodeNames.Count() > 1)
-        throw new Exception("Layer has more than one LayerUnicodeName.");
+    //  // Create or update the Unicode layer name to be consistent with the
+    //  // ANSI layer name.
+    //  var layerUnicodeNames = AdditionalInfo.Where(x => x is LayerUnicodeName);
+    //  if (layerUnicodeNames.Count() > 1)
+    //    throw new Exception("Layer has more than one LayerUnicodeName.");
 
-      var layerUnicodeName = (LayerUnicodeName) layerUnicodeNames.FirstOrDefault();
-      if (layerUnicodeName == null)
-      {
-        layerUnicodeName = new LayerUnicodeName(Name);
-        AdditionalInfo.Add(layerUnicodeName);
-      }
-      else if (layerUnicodeName.Name != Name)
-      {
-        layerUnicodeName.Name = Name;
-      }
-    }
+    //  var layerUnicodeName = (LayerUnicodeName) layerUnicodeNames.FirstOrDefault();
+    //  if (layerUnicodeName == null)
+    //  {
+    //    layerUnicodeName = new LayerUnicodeName(Name);
+    //    AdditionalInfo.Add(layerUnicodeName);
+    //  }
+    //  else if (layerUnicodeName.Name != Name)
+    //  {
+    //    layerUnicodeName.Name = Name;
+    //  }
+    //}
 
-    public void Save(PsdBinaryWriter writer)
-    {
-      Debug.WriteLine("Layer Save started at " + writer.BaseStream.Position.ToString(CultureInfo.InvariantCulture));
+    //public void Save(PsdBinaryWriter writer)
+    //{
+    //  Debug.WriteLine("Layer Save started at " + writer.BaseStream.Position.ToString(CultureInfo.InvariantCulture));
 
-      writer.Write(m_rect.Top);
-      writer.Write(m_rect.Left);
-      writer.Write(m_rect.Bottom);
-      writer.Write(m_rect.Right);
+    //  writer.Write(m_rect.Top);
+    //  writer.Write(m_rect.Left);
+    //  writer.Write(m_rect.Bottom);
+    //  writer.Write(m_rect.Right);
 
-      //-----------------------------------------------------------------------
+    //  //-----------------------------------------------------------------------
 
-      writer.Write((short)m_channels.Count);
-      foreach (Channel ch in m_channels)
-        ch.Save(writer);
+    //  writer.Write((short)m_channels.Count);
+    //  foreach (Channel ch in m_channels)
+    //    ch.Save(writer);
 
-      //-----------------------------------------------------------------------
+    //  //-----------------------------------------------------------------------
 
-      writer.Write(Util.SIGNATURE_8BIM);
-      writer.Write(m_blendModeKey.ToCharArray());
-      writer.Write(m_opacity);
-      writer.Write((byte)(m_clipping ? 1 : 0));
+    //  writer.Write(Util.SIGNATURE_8BIM);
+    //  writer.Write(m_blendModeKey.ToCharArray());
+    //  writer.Write(m_opacity);
+    //  writer.Write((byte)(m_clipping ? 1 : 0));
 
-      writer.Write((byte)m_flags.Data);
+    //  writer.Write((byte)m_flags.Data);
 
-      //-----------------------------------------------------------------------
+    //  //-----------------------------------------------------------------------
 
-      writer.Write((byte)0);
+    //  writer.Write((byte)0);
 
-      //-----------------------------------------------------------------------
+    //  //-----------------------------------------------------------------------
 
-      using (new PsdBlockLengthWriter(writer))
-      {
-        m_maskData.Save(writer);
-        m_blendingRangesData.Save(writer);
+    //  using (new PsdBlockLengthWriter(writer))
+    //  {
+    //    m_maskData.Save(writer);
+    //    m_blendingRangesData.Save(writer);
 
-        long namePosition = writer.BaseStream.Position;
+    //    long namePosition = writer.BaseStream.Position;
 
-        writer.WritePascalString(m_name);
+    //    writer.WritePascalString(m_name);
 
-        int paddingBytes = (int)((writer.BaseStream.Position - namePosition) % 4);
-        Debug.Print("Layer {0} write padding bytes after name", paddingBytes);
+    //    int paddingBytes = (int)((writer.BaseStream.Position - namePosition) % 4);
+    //    Debug.Print("Layer {0} write padding bytes after name", paddingBytes);
 
-        for (int i = 0; i < paddingBytes;i++ )
-          writer.Write((byte)0);
+    //    for (int i = 0; i < paddingBytes;i++ )
+    //      writer.Write((byte)0);
 
-        foreach (LayerInfo info in additionalInfo)
-        {
-          info.Save(writer);
-        }
-      }
-    }
+    //    foreach (LayerInfo info in additionalInfo)
+    //    {
+    //      info.Save(writer);
+    //    }
+    //  }
+    //}
 
     private class CompressChannelContext
     {

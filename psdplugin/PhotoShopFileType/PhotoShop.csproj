@@ -59,15 +59,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="PaintDotNet.Base">
-      <HintPath>C:\Program Files\Paint.NET\PaintDotNet.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="PaintDotNet.Core">
-      <HintPath>C:\Program Files\Paint.NET\PaintDotNet.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="PaintDotNet.Data">
-      <HintPath>C:\Program Files\Paint.NET\PaintDotNet.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -80,19 +71,19 @@
       <Link>PsdFile\ImageResource.cs</Link>
     </Compile>
     <Compile Include="..\PsdFile\ImageResources\AlphaChannelNames.cs">
-      <Link>PsdFile\ImageResources\AlphaChannelNames.cs</Link>
+      <Link>PsdFile\AlphaChannelNames.cs</Link>
     </Compile>
     <Compile Include="..\PsdFile\ImageResources\RawImageResource.cs">
-      <Link>PsdFile\ImageResources\RawImageResource.cs</Link>
+      <Link>PsdFile\RawImageResource.cs</Link>
     </Compile>
     <Compile Include="..\PsdFile\ImageResources\ResolutionInfo.cs">
-      <Link>PsdFile\ImageResources\ResolutionInfo.cs</Link>
+      <Link>PsdFile\ResolutionInfo.cs</Link>
     </Compile>
     <Compile Include="..\PsdFile\ImageResources\Thumbnail.cs">
-      <Link>PsdFile\ImageResources\Thumbnail.cs</Link>
+      <Link>PsdFile\Thumbnail.cs</Link>
     </Compile>
     <Compile Include="..\PsdFile\ImageResources\VersionInfo.cs">
-      <Link>PsdFile\ImageResources\VersionInfo.cs</Link>
+      <Link>PsdFile\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="..\PsdFile\Layer.cs">
       <Link>PsdFile\Layer.cs</Link>
@@ -112,20 +103,7 @@
     <Compile Include="..\PsdFile\Util.cs">
       <Link>PsdFile\Util.cs</Link>
     </Compile>
-    <Compile Include="BlendOpMapping.cs" />
-    <Compile Include="ImageDecoderPdn.cs" />
-    <Compile Include="PhotoshopFileType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PsdSaveConfigToken.cs" />
-    <Compile Include="PsdSaveConfigWidget.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="PsdSaveConfigWidget.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PsdSaveConfigWidget.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -143,6 +121,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PsdFile\ImageResources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
