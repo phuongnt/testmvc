@@ -28,8 +28,6 @@ E:\MVC4\psdplugin\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.ex
 E:\MVC4\psdplugin\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 E:\MVC4\psdplugin\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
 E:\MVC4\psdplugin\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
-E:\MVC4\psdplugin\WindowsFormsApplication1\bin\Debug\PhotoShop.dll
-E:\MVC4\psdplugin\WindowsFormsApplication1\bin\Debug\PhotoShop.pdb
 E:\MVC4\psdplugin\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
 E:\MVC4\psdplugin\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
 E:\MVC4\psdplugin\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
@@ -59,3 +57,5 @@ D:\MVC\testmvc\psdplugin\WindowsFormsApplication1\obj\Debug\WindowsFormsApplicat
 D:\MVC\testmvc\psdplugin\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
 D:\MVC\testmvc\psdplugin\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 D:\MVC\testmvc\psdplugin\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+E:\MVC4\psdplugin\WindowsFormsApplication1\bin\Debug\photosoft.dll
+E:\MVC4\psdplugin\WindowsFormsApplication1\bin\Debug\photosoft.pdb

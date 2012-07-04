@@ -1,0 +1,14 @@
+E:\MyProject\TestSignalr\TestSignalr\bin\TestSignalr.dll
+E:\MyProject\TestSignalr\TestSignalr\bin\TestSignalr.pdb
+E:\MyProject\TestSignalr\TestSignalr\bin\Microsoft.Web.Infrastructure.dll
+E:\MyProject\TestSignalr\TestSignalr\bin\Newtonsoft.Json.dll
+E:\MyProject\TestSignalr\TestSignalr\bin\SignalR.dll
+E:\MyProject\TestSignalr\TestSignalr\bin\SignalR.Hosting.AspNet.dll
+E:\MyProject\TestSignalr\TestSignalr\bin\SignalR.Hosting.Common.dll
+E:\MyProject\TestSignalr\TestSignalr\bin\Newtonsoft.Json.xml
+E:\MyProject\TestSignalr\TestSignalr\bin\SignalR.xml
+E:\MyProject\TestSignalr\TestSignalr\bin\SignalR.Hosting.AspNet.xml
+E:\MyProject\TestSignalr\TestSignalr\bin\SignalR.Hosting.Common.xml
+E:\MyProject\TestSignalr\TestSignalr\obj\Debug\TestSignalr.csprojResolveAssemblyReference.cache
+E:\MyProject\TestSignalr\TestSignalr\obj\Debug\TestSignalr.dll
+E:\MyProject\TestSignalr\TestSignalr\obj\Debug\TestSignalr.pdb

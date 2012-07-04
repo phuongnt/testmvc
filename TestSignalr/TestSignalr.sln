@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSignalr", "TestSignalr\TestSignalr.csproj", "{B753775E-22D3-4C61-B3C9-F4B49F3B904B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CDB001BD-8306-49AD-8639-9CD6A0ADC9A7}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B753775E-22D3-4C61-B3C9-F4B49F3B904B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B753775E-22D3-4C61-B3C9-F4B49F3B904B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B753775E-22D3-4C61-B3C9-F4B49F3B904B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B753775E-22D3-4C61-B3C9-F4B49F3B904B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
