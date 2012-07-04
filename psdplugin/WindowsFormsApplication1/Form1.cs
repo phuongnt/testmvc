@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             PhotoshopFile.PsdFile pfile = new PhotoshopFile.PsdFile();
-            pfile.Load("11.psd");
+            pfile.Load("1.psd");
             //Rectangle rect = new Rectangle(0,0,300,300);
             //pfile.Layers[0].Channels[0].DecompressImageData(pfile.Layers[0].Rect);
            
@@ -31,37 +31,18 @@ namespace WindowsFormsApplication1
             {
                 int width0 = pfile.Layers[i].Rect.Width;
                 int height0 = pfile.Layers[i].Rect.Height;
-                if (i == 2)
+                if (i ==3)
                 {
                     int a = 3;
                 }
-                    test2(pfile.Layers[i], "D://a//conkhi" + i.ToString() + ".", pfile.ColorMode);
+                test2(pfile.Layers[i], "D://ps//" + SafeURL(pfile.Layers[i].Name) + ".", pfile.ColorMode);
                
 
             }
 
 
         }
-        public void test(int width, int height, byte[] imgDataArray1, byte[] imgDataArray2, byte[] imgDataArray3, string path)
-        {
-            //Here create the Bitmap to the know height, width and format
-            Bitmap bmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
-            //Bitmap bmp = new Bitmap(width, height);
-
-            //Create a BitmapData and Lock all pixels to be written 
-            System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(
-                                 new Rectangle(0, 0, bmp.Width, bmp.Height),
-                                 ImageLockMode.WriteOnly, bmp.PixelFormat);
-
-            //Copy the data from the byte array into BitmapData.Scan0
-            System.Runtime.InteropServices.Marshal.Copy(imgDataArray1, 0, bmpData.Scan0, imgDataArray1.Length);
-            System.Runtime.InteropServices.Marshal.Copy(imgDataArray2, 0, bmpData.Scan0, imgDataArray2.Length);
-            System.Runtime.InteropServices.Marshal.Copy(imgDataArray3, 0, bmpData.Scan0, imgDataArray3.Length);
-            //Unlock the pixels
-            bmp.UnlockBits(bmpData);
-            bmp.Save(path, System.Drawing.Imaging.ImageFormat.Bmp);
-
-        }
+       
         public void test2(PhotoshopFile.Layer layer, string path,PhotoshopFile.PsdColorMode ColorMode)
         {
             int width = layer.Rect.Width;
@@ -91,26 +72,12 @@ namespace WindowsFormsApplication1
                                         int heightMask = layer.MaskData.Rect.Height;
                                         int XMask = layer.MaskData.Rect.X-layer.Rect.X;
                                         int YMask = layer.MaskData.Rect.Y-layer.Rect.Y;
-                                        //y>ymask && y< ymask+ heightMask
-                                        //x> xmask && x< xmask + widthMask
-
-                                        if (x > XMask && x < XMask + widthMask && y > YMask && y < YMask + heightMask)
+                                        mask = layer.MaskData.DefaultColor;
+                                        if (x >= XMask && x < XMask + widthMask && y >= YMask && y < YMask + heightMask)
                                         {
                                             mask = layer.Channels[i].ImageData[(widthMask * (y-YMask)) + x-XMask];
-                                            if (mask == 0)
-                                            {
-                                                int a = 3;
-
-                                            }
-                                        }
-
-
-                                        //if (position > (((YMask - layer.Rect.Y) * width) + XMask - layer.Rect.X) && position < ((YMask + heightMask-2 - layer.Rect.Y) * width) + XMask + widthMask-layer.Rect.X)
-                                        //{
-                                        //    //get mask data
-                                        //    mask = layer.Channels[i].ImageData[position - (((YMask -layer.Rect.Y)* width) + XMask-layer.Rect.X)-1];
-                                        //}
-                                        
+                                           
+                                        } 
                                     }
                                     if (layer.Channels[i].ID == -1)
                                     {
@@ -209,6 +176,16 @@ namespace WindowsFormsApplication1
                     bitmap.Save(path + "jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                     
             }
+        }
+        public  string SafeURL(string sURL)
+        {
+            sURL = sURL.Trim().ToLower();
+            sURL = sURL.Replace("ø", "oe");
+            sURL = sURL.Replace("æ", "ae");
+            sURL = sURL.Replace("å", "aa");
+            sURL = System.Text.RegularExpressions.Regex.Replace(sURL, "[^a-z0-9]", "-");
+            sURL = System.Text.RegularExpressions.Regex.Replace(sURL, "-+", "-").Trim();
+            return sURL;
         }
         public static int[] cmykToRgb(int cyan, int magenta, int yellow, int black)
         {
