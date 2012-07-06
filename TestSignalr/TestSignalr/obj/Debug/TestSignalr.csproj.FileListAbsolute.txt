@@ -12,3 +12,17 @@ E:\MyProject\TestSignalr\TestSignalr\bin\SignalR.Hosting.Common.xml
 E:\MyProject\TestSignalr\TestSignalr\obj\Debug\TestSignalr.csprojResolveAssemblyReference.cache
 E:\MyProject\TestSignalr\TestSignalr\obj\Debug\TestSignalr.dll
 E:\MyProject\TestSignalr\TestSignalr\obj\Debug\TestSignalr.pdb
+E:\MVC4\TestSignalr\TestSignalr\bin\TestSignalr.dll
+E:\MVC4\TestSignalr\TestSignalr\bin\TestSignalr.pdb
+E:\MVC4\TestSignalr\TestSignalr\bin\Microsoft.Web.Infrastructure.dll
+E:\MVC4\TestSignalr\TestSignalr\bin\Newtonsoft.Json.dll
+E:\MVC4\TestSignalr\TestSignalr\bin\SignalR.dll
+E:\MVC4\TestSignalr\TestSignalr\bin\SignalR.Hosting.AspNet.dll
+E:\MVC4\TestSignalr\TestSignalr\bin\SignalR.Hosting.Common.dll
+E:\MVC4\TestSignalr\TestSignalr\bin\Newtonsoft.Json.xml
+E:\MVC4\TestSignalr\TestSignalr\bin\SignalR.xml
+E:\MVC4\TestSignalr\TestSignalr\bin\SignalR.Hosting.AspNet.xml
+E:\MVC4\TestSignalr\TestSignalr\bin\SignalR.Hosting.Common.xml
+E:\MVC4\TestSignalr\TestSignalr\obj\Debug\TestSignalr.csprojResolveAssemblyReference.cache
+E:\MVC4\TestSignalr\TestSignalr\obj\Debug\TestSignalr.dll
+E:\MVC4\TestSignalr\TestSignalr\obj\Debug\TestSignalr.pdb

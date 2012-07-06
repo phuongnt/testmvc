@@ -25,7 +25,7 @@
 
 
            // Proxy created on the fly
-           var chat = $.connection.chat;
+           var chat = $.connection.chat1;
 
            // Declare a function on the chat hub so the server can invoke it
            chat.addMessage = function (message) {

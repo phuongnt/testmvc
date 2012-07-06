@@ -6,12 +6,13 @@ using SignalR.Hubs;
 
 namespace TestSignalr
 {
-    public class Chat : Hub
+    public class Chat1 : Hub
     {
         public void Send(string message)
         {
             // Call the addMessage method on all clients
-            Clients.addMessage(message);
+            Clients.addMessage(message + "xxx");
+            
         }
     }
 }
