@@ -8,6 +8,7 @@
         <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/themes/base/css")" rel="stylesheet" type="text/css" />
         <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Scripts/js")"></script>
         <script type="text/javascript" src="../../Scripts/knockout-2.0.0.js"></script>
+        
         <meta name="viewport" content="width=device-width" />
     </head>
     <body>
@@ -32,8 +33,7 @@
         </header>
         <div id="body">
             <div>
-                Con ga con
-                <span data-bind="text: firstName" ></span>
+               
 
             </div>
             @RenderSection("featured", required: false)
@@ -56,11 +56,7 @@
         </footer>
          <script type="text/javascript">
             
-                function mymodel() {
-                    this.firstName = ko.observable("sdfsfas");
-                    this.fullName = ko.observable("dsafsdaf");
-                }
-                ko.applyBindings(new mymodel());
+        
                 //function AppViewModel() {
                 //    this.firstName = "Bert";
                 //    this.lastName = "Bertington";
