@@ -1,6 +1,0 @@
-E:\MVC4\PsdParser\Endogine.Codecs.Photoshop\bin\Debug\FourCC.txt
-E:\MVC4\PsdParser\Endogine.Codecs.Photoshop\bin\Debug\Endogine.Codecs.Photoshop.dll
-E:\MVC4\PsdParser\Endogine.Codecs.Photoshop\bin\Debug\Endogine.Codecs.Photoshop.pdb
-E:\MVC4\PsdParser\Endogine.Codecs.Photoshop\bin\Debug\Endogine.dll
-E:\MVC4\PsdParser\Endogine.Codecs.Photoshop\obj\Debug\Endogine.Codecs.Photoshop.dll
-E:\MVC4\PsdParser\Endogine.Codecs.Photoshop\obj\Debug\Endogine.Codecs.Photoshop.pdb

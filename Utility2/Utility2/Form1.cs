@@ -131,5 +131,18 @@ namespace Utility2
             var a = 3;
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string a = "cong ty destino vietnam";
+            string[] a1 = a.Split(' ');
+            string temp="";
+            List<string> lista = new List<string>();
+            for (int i =a1.Length-1; i >=0; i--)
+            {
+                temp += a1[i] + " ";
+            }
+            MessageBox.Show(temp);
+        }
+
     }
 }
