@@ -1,0 +1,44 @@
+﻿@model cooking.Models.ClassRoom
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ClassRoom</legend>
+
+        @Html.HiddenFor(model => model.ClassRoomID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ClassName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ClassName)
+            @Html.ValidationMessageFor(model => model.ClassName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Teacher)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Teacher)
+            @Html.ValidationMessageFor(model => model.Teacher)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

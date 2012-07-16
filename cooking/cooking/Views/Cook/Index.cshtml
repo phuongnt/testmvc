@@ -1,0 +1,51 @@
+﻿@model IEnumerable<cooking.Models.Cook>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HostedBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HostedBy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CookID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CookID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CookID })
+        </td>
+    </tr>
+}
+
+</table>
