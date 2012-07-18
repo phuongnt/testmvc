@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "SimpleGrid";
+}
+
+<h2>SimpleGrid</h2>
+<table data-bind='foreach: items'>
+    <tr>
+        <td data-bind="text:name">
+
+        </td>
+        <td data-bind="text:sales">
+
+        </td>
+        <td data-bind="text:price">
+
+        </td>
+        <td>
+            <button data-bind="click: $root.deleteitem">Delete item
+
+            </button>
+        </td>
+    </tr>
+</table>
+@* <div>
+     <input data-bind="name" type="text" />
+
+ </div>
+<div>
+     <input data-bind="sales" type="text" />
+
+ </div>
+<div>
+     <input data-bind="price" type="text" />
+
+ </div>*@
+ <button data-bind="click: addItem">add</button>
+<script type="text/javascript">
+
+  
+    var initialData = [
+    { name: "Well-Travelled Kitten", sales: 352, price: 75.95 },
+    { name: "Speedy Coyote", sales: 89, price: 190.00 },
+    { name: "Furious Lizard", sales: 152, price: 25.00 },
+    { name: "Indifferent Monkey", sales: 1, price: 99.95 },
+    { name: "Brooding Dragon", sales: 0, price: 6350 },
+    { name: "Ingenious Tadpole", sales: 39450, price: 0.35 },
+    { name: "Optimistic Snail", sales: 420, price: 1.50 }
+    ];
+
+    var product = function () { }
+    {
+        var self = this;
+        self.name = ko.observable("");
+        self.sales = ko.observable(0);
+        self.price = ko.observable(0);
+
+    }
+    var PagedGridModel = function (items) {
+        var self = this;
+        self.items = ko.observableArray(items);
+        self.deleteitem = function (item) {
+             
+            self.items.remove(item);
+
+        };
+        self.addItem = function () {
+            self.items.push({ name: "<div style='color:red;'>xxx</div>", sales: 352, price: 75.95 });
+        }
+
+         
+    };
+
+    ko.applyBindings(new PagedGridModel(initialData));
+    
+</script>

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+ 
+<h2>Index</h2>
+
+<span data-bind="text: numofClick"></span>
+<button data-bind="click: clickme, disable: maxskill">test</button>
+<button data-bind="click: clear1">clear</button>
+<script type="text/javascript">
+    var myModel = function()
+    {
+        this.numofClick = ko.observable(1);
+        this.clickme = function () {
+            this.numofClick(this.numofClick() + 1);
+        }
+        this.maxskill =ko.computed(function () {
+            return this.numofClick() >= 5;
+        }, this)
+        this.clear1 = function () {
+            this.numofClick(0);
+        }
+    }
+    ko.applyBindings(new myModel());
+
+</script>
