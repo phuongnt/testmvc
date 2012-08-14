@@ -23,6 +23,6 @@ E:\MVC4\TestSignalr\TestSignalr\bin\Newtonsoft.Json.xml
 E:\MVC4\TestSignalr\TestSignalr\bin\SignalR.xml
 E:\MVC4\TestSignalr\TestSignalr\bin\SignalR.Hosting.AspNet.xml
 E:\MVC4\TestSignalr\TestSignalr\bin\SignalR.Hosting.Common.xml
-E:\MVC4\TestSignalr\TestSignalr\obj\Debug\TestSignalr.csprojResolveAssemblyReference.cache
 E:\MVC4\TestSignalr\TestSignalr\obj\Debug\TestSignalr.dll
 E:\MVC4\TestSignalr\TestSignalr\obj\Debug\TestSignalr.pdb
+E:\MVC4\TestSignalr\TestSignalr\obj\Debug\TestSignalr.csprojResolveAssemblyReference.cache

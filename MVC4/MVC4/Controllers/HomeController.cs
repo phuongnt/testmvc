@@ -28,5 +28,31 @@ namespace MVC4.Controllers
 
             return View();
         }
+      
+        
+        public JsonResult hehe()
+        {
+            
+            //abc cde = new abc();
+            //cde.name = "phuong";
+            //cde.value = "xx";
+            //string a = "{\"name\":\"haha\"}";
+            //return Json(cde, JsonRequestBehavior.AllowGet);
+            return Json("",JsonRequestBehavior.AllowGet);
+        }
+        abstract class abc
+        {
+            public string name { get; set; }
+            public string value { get; set; }
+
+            public abstract void abcd();
+             
+
+        }
+        interface hehee
+        {
+            
+        }
+
     }
 }

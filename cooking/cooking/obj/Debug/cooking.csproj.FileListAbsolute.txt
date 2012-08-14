@@ -33,3 +33,4 @@ E:\MVC4\cooking\cooking\bin\System.Web.WebPages.Deployment.xml
 E:\MVC4\cooking\cooking\bin\System.Web.WebPages.Razor.xml
 E:\MVC4\cooking\cooking\obj\Debug\cooking.dll
 E:\MVC4\cooking\cooking\obj\Debug\cooking.pdb
+E:\MVC4\cooking\cooking\obj\Debug\cooking.csprojResolveAssemblyReference.cache

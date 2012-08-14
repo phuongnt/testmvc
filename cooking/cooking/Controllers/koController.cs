@@ -23,6 +23,8 @@ namespace cooking.Controllers
 
         public ActionResult SimpleGrid()
         {
+            Response.Cookies.Add(new HttpCookie("xxx","hohoho"));
+            ViewBag.abc = "cai j day";
             return View();
         }
 

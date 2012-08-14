@@ -1,43 +1,35 @@
 ﻿@{
     ViewBag.Title = "SimpleGrid";
 }
-
 <h2>SimpleGrid</h2>
+@ViewBag.abc
 <div data-bind="foreach: productType ">
-    <div><input type="checkbox" data-bind="checked: select" /><span data-bind="text:typeName"></span></div>
-
+    <div>
+        <input type="checkbox" data-bind="value: typeName, checked: $root.getchecked()" /><span data-bind="text:typeName">
+        </span>
+    </div>
 </div>
 <table data-bind='foreach: showItems'>
     <tr>
-        <td data-bind="text:name">
-
-        </td>
-        <td data-bind="text:sales">
-
-        </td>
-        <td data-bind="text:price">
-
-        </td>
-          <td data-bind="text: type1">
-              
-        </td>
+        <td data-bind="text:name"></td>
+        <td data-bind="text:sales"></td>
+        <td data-bind="text:price"></td>
+        <td data-bind="text: type1"></td>
         <td>
-            <button data-bind="click: $root.deleteitem">Delete item
-
+            <button data-bind="click: $root.deleteitem">
+                Delete item
             </button>
         </td>
     </tr>
 </table>
- 
- <button data-bind="click: addItem">add</button>
+<button data-bind="click: addItem">add</button>
 <script type="text/javascript">
-    var mytype = function (typename,select)
-    {
+    var mytype = function (typename, select) {
         this.typeName = ko.observable(typename);
         this.select = ko.observable(select);
-    }
-    
-    
+    };
+
+
     //var product = function () { }
     //{
     //    var self = this;
@@ -45,28 +37,29 @@
     //    self.sales = ko.observable(0);
     //    self.price = ko.observable(0);
     //    self.type1 = ko.observable("phuongttt");
-
     //}
+
     var PagedGridModel = function () {
-        
         var self = this;
-        self.productType = ko.observableArray([{ typeName: "phuongxx", select: true },{ typeName: "xxxxx", select: true }]);// ko.observableArray([new mytype("phuongxx", true), new mytype("test", true)]);
+        self.productType = ko.observableArray([{ typeName: "phuongxx", select: false }, { typeName: "xxxxx", select: true }]);// ko.observableArray([new mytype("phuongxx", true), new mytype("test", true)]);
         self.typeShow = ko.observableArray([]);
+        self.getchecked = function () {
+            var x = 3;
+        };
         self.addTypeShow = function (value) {
-            if (value == true)
-            {
-                
+            if (value == true) {
+
             }
         };
-        self.items = ko.observableArray([{ name: "Well-Travelled Kitten", sales: 352, price: 75.95, type1:"xxx" },
-        { name: "Speedy Coyote", sales: 89, price: 190.00, type1:self.productType()[1].typeName },
+        self.items = ko.observableArray([{ name: "Well-Travelled Kitten", sales: 352, price: 75.95, type1: "xxx" },
+        { name: "Speedy Coyote", sales: 89, price: 190.00, type1: self.productType()[1].typeName },
         { name: "Furious Lizard", sales: 152, price: 25.00, type1: self.productType()[0].typeName },
         { name: "Indifferent Monkey", sales: 1, price: 99.95, type1: self.productType()[0].typeName },
         { name: "Brooding Dragon", sales: 0, price: 6350, type1: self.productType()[1].typeName },
         { name: "Ingenious Tadpole", sales: 39450, price: 0.35, type1: self.productType()[1].typeName },
         { name: "Optimistic Snail", sales: 420, price: 1.50, type1: self.productType()[0].typeName }]);
 
-        self.deleteitem = function (item) {             
+        self.deleteitem = function (item) {
             self.items.remove(item);
         };
         //self.TypeVisible = ko.computed(function () {
@@ -80,21 +73,21 @@
             //return self.items;
             return ko.utils.arrayFilter(self.items(), function (planet) {
                 var temp = ko.utils.arrayFilter(self.productType(), function (hehe) {
-                   return hehe.select == true;
+                    return hehe.select == true;
 
                 });
-                if (ko.utils.arrayFilter(temp,function (xx) {
+                if (ko.utils.arrayFilter(temp, function (xx) {
                 return planet.type1 == xx.typeName;
-            }).length > 0)
+                }).length > 0)
                     return true;
                 return false;
                 //return planet.type1 == self.productType[0].typeName();
-        });
+            });
         });
         self.addItem = function () {
-            self.items.push({ name: "<div style='color:red;'>xxx</div>", sales: 352, price: 75.95, type1: self.productType[0] });
-        }         
+            self.items.push({name: "Optimistic Snail", sales: 420, price: 1.50, type1: self.productType()[0].typeName});
+        };
     };
     ko.applyBindings(new PagedGridModel());
-    
+
 </script>

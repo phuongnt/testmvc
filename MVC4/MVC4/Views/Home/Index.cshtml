@@ -18,7 +18,32 @@
     </div>
 </section>
 }
+<script type="text/javascript">
+    $(document).ready(function () {
 
+
+        $('#conmeno').click(function () {
+            
+            $.ajax({
+                url: "/home/hehe",
+                contentType: "application/json",
+                context: document.body,
+                success: function (rs) {
+                    //alert(rs.name);
+                    $('#mycontent').text(rs.name);
+                }
+            });
+
+        });
+
+    });
+    
+</script>
+<button id="conmeno">con meno</button>
+<div id="mycontent" style="border: solid 1px red;">
+
+
+</div>
 <h3>We suggest the following:</h3>
 
 <ol class="round">
