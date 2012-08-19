@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Web;
 using System.IO;
 using System.Net;
+using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Utility2
 {
@@ -126,9 +128,12 @@ namespace Utility2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            PhotoshopFile.PsdFile pfile = new PhotoshopFile.PsdFile();
-            pfile.Load("D:/1.psd");
-            var a = 3;
+            for (int i = 0; i < 10; i++) 
+            {
+                Thread.Sleep(500);
+                txtKeyDown.Text = i.ToString();
+                Application.DoEvents();
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -142,6 +147,38 @@ namespace Utility2
                 temp += a1[i] + " ";
             }
             MessageBox.Show(temp);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var httpDownload = new HttpSession();
+            var sUrl = "http://www.viavia.no/admin";
+            getCookieDestinet(sUrl);
+        }
+        public string getCookieDestinet(string sUrl)
+        {
+            string destinet = "";
+            var httpDownload = new HttpSession();
+          
+            var sPost = "dnn$ctr$Signin$Signin_textboxUsername=host" +
+                        "&dnn$ctr$Signin$Signin_textboxPassword=guidedes10no" +
+                        "&dnn$ctr$Signin$cmdLogin=Logg%20inn";
+
+            var sContent = httpDownload.GetMethodDownload(sUrl, true, false, false, true);
+
+            // step 2
+            var _cookies = httpDownload.Cookies;
+
+            string strRegex = "<input\\s+type=.{1}hidden.{1}\\s+name=.{1}__VIEWSTATE.{1}\\s+id=.{1}__VIEWSTATE.{1}\\s+value=.{1}([^.\"]+)";
+
+            Regex rxGetViewState = new Regex(strRegex);
+            Match mViewState = rxGetViewState.Match(sContent);
+
+            string sViewState = mViewState.Groups[1].Value;//.Replace("/", "%2F").Replace("=", "%3D");
+            sPost += "&__VIEWSTATE=" + sViewState;
+            httpDownload.PostMethodDownload(sUrl, sPost, true, false, false, true);
+            destinet = httpDownload.Cookies[".DESTINET"].Value;
+            return destinet;
         }
 
     }
