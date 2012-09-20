@@ -41,7 +41,7 @@ namespace cooking.Models
     {
         public int StudentID { get; set; }
         public string Name { get; set; }
-        public virtual ClassRoom Class{get;set;}
+        public virtual ClassRoom Class { get; set; }
 
         //public int ClassID { get; set; }        
     }
@@ -57,7 +57,19 @@ namespace cooking.Models
     // Our EF Code First Context class.  This class handles persistence and
     // interactions with the database.  This could have also been implemented
     // in a separate class library.
-
+    public class ProductCategory
+    {
+        public int ProductCategoryID { get; set; }
+        public string CategoryName { get; set; }
+        public int ParentID { get; set; }
+    }
+    public class Product
+    {
+        public int ProductID{get;set;}
+        public string ProductName { get; set; }
+        public string Description { get; set; }
+        
+    }
     public class Cookingdb : DbContext
     {
         public DbSet<Cook> Cooks { get; set; }
