@@ -18,14 +18,15 @@ namespace Utility2
 {
     public partial class DownloadFile : Form
     {
-
         string targetFolder = "D://DI";
         string sUrl = "";
         string ckLoadLink = "/ckfinder/core/connector/aspx/connector.aspx?command=[[0]]&type=[[1]]&currentFolder=[[2]]";
+
         public DownloadFile()
         {
             InitializeComponent();
         }
+
         public string getCookieDestinet(string sUrl1, ref CookieCollection _cookies)
         {
             string destinet = "";
@@ -41,7 +42,6 @@ namespace Utility2
             _cookies = httpDownload.Cookies;
 
             string strRegex = "<input\\s+type=.{1}hidden.{1}\\s+name=.{1}__VIEWSTATE.{1}\\s+id=.{1}__VIEWSTATE.{1}\\s+value=.{1}([^.\"]+)";
-
             Regex rxGetViewState = new Regex(strRegex);
             Match mViewState = rxGetViewState.Match(sContent);
 
@@ -62,16 +62,12 @@ namespace Utility2
                     c1.Expired = false;
                     c1.Expires = DateTime.Now.AddMinutes(100);
                     httpDownload.Cookies.Add(c1);
-
                 }
             }
-
-
 
             _cookies = httpDownload.Cookies;
             return destinet;
         }
-
 
         public void DownloadRecusive(ref HttpSession httpDownload, string ckLink, string parentFolder)
         {
@@ -81,7 +77,7 @@ namespace Utility2
             string rootFolderName = _doc.GetElementsByTagName("CurrentFolder")[0].Attributes[0].Value;
             XmlNodeList listFolder = _doc.GetElementsByTagName("Folder");
             //download file for current folder
-            string ckGetFileLink = sUrl + ckLoadLink.Replace("[[0]]", "GetFiles").Replace("[[1]]", "Portalens%20rotmappe").Replace("[[2]]", parentFolder);
+            string ckGetFileLink = sUrl + ckLoadLink.Replace("[[0]]", "GetFiles").Replace("[[1]]", "Portalens%20rotmappe").Replace("[[2]]", parentFolder.Replace("&", "%26"));
             downloadFile(ref httpDownload, ckGetFileLink);
 
             //get folders
@@ -93,95 +89,94 @@ namespace Utility2
                 if (!dir.Exists)
                 {
                     dir.Create();
-
                 }
                 bool hasChild = false;
                 hasChild = bool.Parse(listFolder[_i].Attributes[1].Value);
 
                 if (hasChild)
                 {
-                    string tempCKForderLink = sUrl + ckLoadLink.Replace("[[0]]", "GetFolders").Replace("[[1]]", "Portalens%20rotmappe").Replace("[[2]]", parentFolder + FolderName.Replace(" ", "%20") + "%2F");
+                    string tempCKForderLink = sUrl + ckLoadLink.Replace("[[0]]", "GetFolders").Replace("[[1]]", "Portalens%20rotmappe").Replace("[[2]]", parentFolder + FolderName.Replace(" ", "%20").Replace("&", "%26") + "%2F");
                     DownloadRecusive(ref httpDownload, tempCKForderLink, parentFolder + FolderName + "%2F");
                 }
                 else
                 {
                     //download file for current forder if it has not child
-                    string ckGetFileLink1 = sUrl + ckLoadLink.Replace("[[0]]", "GetFiles").Replace("[[1]]", "Portalens%20rotmappe").Replace("[[2]]", parentFolder + FolderName + "%2F");
+                    string ckGetFileLink1 = sUrl + ckLoadLink.Replace("[[0]]", "GetFiles").Replace("[[1]]", "Portalens%20rotmappe").Replace("[[2]]", parentFolder + FolderName.Replace("&", "%26") + "%2F");
                     downloadFile(ref httpDownload, ckGetFileLink1);
                 }
-
             }
-
         }
+
         public void downloadFile(ref HttpSession httpDownload, string ckLink)
         {
             var rootXML = httpDownload.GetMethodDownload(ckLink, true, false, false, true);
-            XmlDocument _doc = new XmlDocument();
-            _doc.LoadXml(rootXML);
-            string rootFolderName = _doc.GetElementsByTagName("CurrentFolder")[0].Attributes[0].Value;
-            string fullFolderName = _doc.GetElementsByTagName("CurrentFolder")[0].Attributes[1].Value;
-            XmlNodeList listFile = _doc.GetElementsByTagName("File");
-            StreamWriter sw = new StreamWriter(targetFolder + rootFolderName + rootFolderName.Replace("/", "") + ".txt");
 
-
-
-            for (int _i = 0; _i < listFile.Count; ++_i)
-            //for (int _i = listFile.Count-1; _i < listFile.Count; ++_i)
+            if (!rootXML.Contains("<Connector><Error number=\"116\" /></Connector>"))
             {
                 try
                 {
-                    if (listFile[_i].Attributes[0] != null)
+                    XmlDocument _doc = new XmlDocument();
+                    _doc.LoadXml(rootXML);
+                    string rootFolderName = _doc.GetElementsByTagName("CurrentFolder")[0].Attributes[0].Value;
+                    string fullFolderName = _doc.GetElementsByTagName("CurrentFolder")[0].Attributes[1].Value;
+                    XmlNodeList listFile = _doc.GetElementsByTagName("File");
+                    StreamWriter sw = new StreamWriter(targetFolder + rootFolderName + rootFolderName.Replace("/", "") + ".txt");
+
+                    for (int _i = 0; _i < listFile.Count; ++_i)
                     {
-                        string filename = listFile[_i].Attributes[0].Value;
-                        if (filename.Contains("Cache"))
+                        try
                         {
-                            int a = 3;
-                        }
-                        txtStatus.Text = "download file: " + System.Environment.NewLine +
-                          sUrl + fullFolderName + filename + System.Environment.NewLine + txtStatus.Text + System.Environment.NewLine;
-                        sw.WriteLine(sUrl + fullFolderName + filename);
-                        Application.DoEvents();
-                        if (checkOnlyGetLink.Checked == false)
-                        {
-                            if (!System.IO.File.Exists(targetFolder + rootFolderName + filename))
+                            if (listFile[_i].Attributes[0] != null)
                             {
-                                
-                                if (checkUseIDM.Checked == true)
+                                string filename = listFile[_i].Attributes[0].Value;
+                                if (filename.Contains("Cache"))
                                 {
-
-                                    if (rootFolderName.Length > 1)
+                                    int a = 3;
+                                }
+                                txtStatus.Text = "download file: " + System.Environment.NewLine +
+                                  sUrl + fullFolderName + filename + System.Environment.NewLine + txtStatus.Text + System.Environment.NewLine;
+                                sw.WriteLine(sUrl + fullFolderName + filename);
+                                Application.DoEvents();
+                                if (checkOnlyGetLink.Checked == false)
+                                {
+                                    if (!System.IO.File.Exists(targetFolder + rootFolderName + filename))
                                     {
-
-                                        downloadByIDM(sUrl + fullFolderName + filename, targetFolder + rootFolderName.Substring(0, rootFolderName.Length - 1));
+                                        if (checkUseIDM.Checked == true)
+                                        {
+                                            if (rootFolderName.Length > 1)
+                                            {
+                                                downloadByIDM(sUrl + fullFolderName + filename, targetFolder + rootFolderName.Substring(0, rootFolderName.Length - 1));
+                                            }
+                                            else
+                                            {
+                                                downloadByIDM(sUrl + fullFolderName + filename, targetFolder);
+                                            }
+                                            Thread.Sleep(1000);
+                                        }
+                                        else
+                                        {
+                                            WebClient webClient = new WebClient();
+                                            webClient.DownloadFile(sUrl + fullFolderName + filename, targetFolder + rootFolderName + filename);
+                                        }
                                     }
-                                    else {
-                                        downloadByIDM(sUrl + fullFolderName + filename, targetFolder);
-                                    }
-                                    Thread.Sleep(1000);
-                                  
                                 }
-                                else
-                                {
-                                    WebClient webClient = new WebClient();
-                                    webClient.DownloadFile(sUrl + fullFolderName + filename, targetFolder + rootFolderName + filename);
-                                }
-                 
                             }
                         }
-
-
+                        catch (Exception ex)
+                        {
+                            txtStatus.Text = ex.Message + System.Environment.NewLine + txtStatus.Text + System.Environment.NewLine;
+                            Application.DoEvents();
+                        }
                     }
-
+                    sw.Close();
                 }
                 catch (Exception ex)
                 {
-                    txtStatus.Text = ex.Message + System.Environment.NewLine + txtStatus.Text + System.Environment.NewLine;
-                    Application.DoEvents();
+                    string error = ex.Message;
                 }
             }
-            sw.Close();
-
         }
+
         private void btDownload_Click(object sender, EventArgs e)
         {
             if (checkUseIDM.Checked == true)
@@ -211,8 +206,6 @@ namespace Utility2
 
             string rootLink = sUrl + ckLoadLink.Replace("[[0]]", "GetFolders").Replace("[[1]]", "Portalens%20rotmappe").Replace("[[2]]", "%2F");// "/ckfinder/core/connector/aspx/connector.aspx?command=GetFolders&type=Portalens%20rotmappe&currentFolder=%2F";
             DownloadRecusive(ref httpDownload, rootLink, "%2F");
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -222,8 +215,6 @@ namespace Utility2
             {
                 txtFolder.Text = folderBrowserDialog1.SelectedPath;
             }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -245,12 +236,10 @@ namespace Utility2
             Application.DoEvents();
         }
 
-
-        public void downloadByIDM(string downloadLink,string SaveToFolder)
+        public void downloadByIDM(string downloadLink, string SaveToFolder)
         {
-            
             string IDMURL = txtIDMLink.Text;// "C:\\Program Files (x86)\\Internet Download Manager\\IDMan.exe";
-            System.Diagnostics.Process.Start(IDMURL, " /d \""+ downloadLink.Replace(" ","%20")+"\" /s /n /a /p \""+ SaveToFolder.Replace("/","\\") + "\"" );
+            System.Diagnostics.Process.Start(IDMURL, " /d \"" + downloadLink.Replace(" ", "%20") + "\" /s /n /a /p \"" + SaveToFolder.Replace("/", "\\") + "\"");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -260,39 +249,35 @@ namespace Utility2
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            string filename = ".txt";
+            //string filename = ".txt";
             var rootFolder = txtFolder.Text;
             DirectoryInfo root = new DirectoryInfo(rootFolder);
-            
+
             var aa = root.GetDirectories().Length;
-            checkRecusive(rootFolder, "","");
-           // checkByTextFile(txtFolder.Text + "\\" + filename,txtFolder.Text);
-
+            checkRecusive(rootFolder, "", "");
+            // checkByTextFile(txtFolder.Text + "\\" + filename,txtFolder.Text);
         }
-        public void checkRecusive(string parentPath,string Folder,string parentFolder)
-        {
-          
 
-            checkByTextFile(parentPath +  "/" + parentFolder + Folder + ".txt", parentPath + Folder);
+        public void checkRecusive(string parentPath, string Folder, string parentFolder)
+        {
+            checkByTextFile(parentPath + "/" + parentFolder + Folder + ".txt", parentPath + Folder);
             DirectoryInfo root = new DirectoryInfo(parentPath);
             if (root.GetDirectories().Length > 0)
             {
                 foreach (DirectoryInfo item in root.GetDirectories())
                 {
-                    checkRecusive(parentPath + "/" + item.Name, item.Name, Folder);    
+                    checkRecusive(parentPath + "/" + item.Name, item.Name, Folder);
                 }
-                
             }
-
-            
         }
+
         public void checkByTextFile(string textURL, string folder)
         {
             StreamReader sr = new StreamReader(textURL);
             while (!sr.EndOfStream)
             {
                 string filename = sr.ReadLine();
-                string localFilename =folder+  filename.Substring(filename.LastIndexOf("/"));
+                string localFilename = folder + filename.Substring(filename.LastIndexOf("/"));
                 if (!System.IO.File.Exists(localFilename))
                 {
                     string IDMURL = txtIDMLink.Text;// "C:\\Program Files (x86)\\Internet Download Manager\\IDMan.exe";
