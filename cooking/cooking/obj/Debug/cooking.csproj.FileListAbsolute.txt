@@ -1,6 +1,5 @@
 E:\MVC4\cooking\cooking\bin\cooking.dll
 E:\MVC4\cooking\cooking\bin\cooking.pdb
-E:\MVC4\cooking\cooking\bin\EntityFramework.dll
 E:\MVC4\cooking\cooking\bin\Microsoft.Web.Infrastructure.dll
 E:\MVC4\cooking\cooking\bin\System.Json.dll
 E:\MVC4\cooking\cooking\bin\System.Net.Http.dll
@@ -17,7 +16,6 @@ E:\MVC4\cooking\cooking\bin\System.Web.Razor.dll
 E:\MVC4\cooking\cooking\bin\System.Web.WebPages.Deployment.dll
 E:\MVC4\cooking\cooking\bin\System.Web.WebPages.dll
 E:\MVC4\cooking\cooking\bin\System.Web.WebPages.Razor.dll
-E:\MVC4\cooking\cooking\bin\EntityFramework.xml
 E:\MVC4\cooking\cooking\bin\System.Json.xml
 E:\MVC4\cooking\cooking\bin\System.Net.Http.xml
 E:\MVC4\cooking\cooking\bin\System.Net.Http.Formatting.xml

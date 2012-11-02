@@ -111,7 +111,6 @@ namespace pnet.Models
     public class Product
     {
         public int ID;
-
         public string Name;
     }
 }
